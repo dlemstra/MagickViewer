@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						  xmlns:m="clr-namespace:MagickViewer.Controls">
+	<!-- MergedDictionaries -->
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="../Shared.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	<!-- Button -->
+	<Style TargetType="Button" x:Key="Theme.MenuButton" BasedOn="{StaticResource Shared.MenuButton}">
+		<Setter Property="Background" Value="#2D2D2D"/>
+		<Setter Property="Foreground" Value="#FFFFFF"/>
+		<Setter Property="FontFamily" Value="../../Fonts/#OpenSans-Bold"/>
+		<Setter Property="BorderBrush">
+			<Setter.Value>
+				<SolidColorBrush Color="#777777"/>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style TargetType="Button" x:Key="Theme.Close" BasedOn="{StaticResource Shared.Icon}">
+		<Setter Property="Background">
+			<Setter.Value>
+				<ImageBrush ImageSource="Close.png"/>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style TargetType="Button" x:Key="Theme.Menu" BasedOn="{StaticResource Shared.Icon}">
+		<Setter Property="Background">
+			<Setter.Value>
+				<ImageBrush ImageSource="Menu.png"/>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<!-- Grid -->
+	<Style TargetType="Grid" x:Key="Theme.Grid">
+		<Setter Property="Background" Value="#777777"/>
+	</Style>
+	<!-- ImageViewer -->
+	<Style TargetType="m:ImageViewer" x:Key="Theme.ImageViewer">
+		<Setter Property="LoadingImageSource" Value="Loading.png"/>
+	</Style>
+	<!-- Logo -->
+	<Style TargetType="m:Logo" x:Key="Theme.Logo" BasedOn="{StaticResource Shared.Logo}">
+		<Setter Property="Foreground" Value="#FFFFFF"/>
+		<Setter Property="FontFamily" Value="../../Fonts/#OpenSans-Bold"/>
+	</Style>
+	<!-- StackPanel -->
+	<Style TargetType="StackPanel" x:Key="Theme.MenuBar">
+		<Setter Property="Background" Value="#2D2D2D"/>
+	</Style>
+	<!-- TextBlock -->
+	<Style TargetType="TextBlock" x:Key="Theme.TopBar">
+		<Setter Property="Background" Value="#2D2D2D"/>
+		<Setter Property="Foreground" Value="#FFFFFF"/>
+		<Setter Property="FontFamily" Value="../../Fonts/#OpenSans-Bold"/>
+		<Setter Property="Padding" Value="24 3 24 0"/>
+	</Style>
+</ResourceDictionary>
