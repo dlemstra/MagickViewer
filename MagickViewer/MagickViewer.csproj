@@ -30,8 +30,8 @@
     <ProductName>MagickViewer</ProductName>
     <PublisherName>Dirk Lemstra</PublisherName>
     <SuiteName>Magick.NET</SuiteName>
-    <MinimumRequiredVersion>6.8.9.401</MinimumRequiredVersion>
-    <ApplicationRevision>404</ApplicationRevision>
+    <MinimumRequiredVersion>6.8.9.501</MinimumRequiredVersion>
+    <ApplicationRevision>502</ApplicationRevision>
     <ApplicationVersion>6.8.9.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -58,6 +58,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\MagickViewer.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\Icons\MagickViewer.ico</ApplicationIcon>
@@ -81,8 +82,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Magick.NET-x64">
-      <HintPath>..\packages\Magick.NET-Q16-x64.6.8.9.401\lib\net40-client\Magick.NET-x64.dll</HintPath>
+    <Reference Include="Magick.NET-x64, Version=6.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Magick.NET-Q16-x64.6.8.9.501\lib\net40-client\Magick.NET-x64.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
