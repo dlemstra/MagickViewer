@@ -30,7 +30,7 @@
     <ProductName>MagickViewer</ProductName>
     <PublisherName>Dirk Lemstra</PublisherName>
     <SuiteName>Magick.NET</SuiteName>
-    <MinimumRequiredVersion>6.8.9.501</MinimumRequiredVersion>
+    <MinimumRequiredVersion>7.0.0.2</MinimumRequiredVersion>
     <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>7.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
@@ -82,9 +82,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Magick.NET-x64, Version=6.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=AMD64">
+    <Reference Include="Magick.NET-x64, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Magick.NET-Q16-x64.6.8.9.501\lib\net40-client\Magick.NET-x64.dll</HintPath>
+      <HintPath>..\packages\Magick.NET-Q16-x64.7.0.0.0002\lib\net40-client\Magick.NET-x64.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
