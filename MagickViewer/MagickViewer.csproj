@@ -31,8 +31,8 @@
     <PublisherName>Dirk Lemstra</PublisherName>
     <SuiteName>Magick.NET</SuiteName>
     <MinimumRequiredVersion>6.8.9.501</MinimumRequiredVersion>
-    <ApplicationRevision>502</ApplicationRevision>
-    <ApplicationVersion>6.8.9.%2a</ApplicationVersion>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>7.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -70,7 +70,7 @@
     <AssemblyOriginatorKeyFile>Magick.NET.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>BC619764B3A97FA4568C7641FE31D29580AA8567</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>13B6656B077049BE95E5F780AB3AEB770791C3A0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>MagickViewer.pfx</ManifestKeyFile>
