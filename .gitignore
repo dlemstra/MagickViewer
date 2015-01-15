@@ -1,0 +1,7 @@
+﻿
+/MagickViewer/bin
+/MagickViewer/obj
+/MagickViewer/*.user
+/*.suo
+/packages
+/Publish
