@@ -1,5 +1,5 @@
 ﻿//=================================================================================================
-// Copyright 2013-2014 Dirk Lemstra <https://magick.codeplex.com/>
+// Copyright 2014-2015 Dirk Lemstra <https://magick.codeplex.com/>
 //
 // Licensed under the ImageMagick License (the "License"); you may not use this file except in 
 // compliance with the License. You may obtain a copy of the License at
@@ -23,7 +23,7 @@ using System.Resources;
 [assembly: AssemblyProduct("Magick.NET")]
 [assembly: AssemblyDescription("MagickViewer")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyCopyright("Copyright © Dirk Lemstra 2014")]
+[assembly: AssemblyCopyright("Copyright © Dirk Lemstra 2015")]
 [assembly: AssemblyTrademark("")]
 //=================================================================================================
 [assembly: AssemblyConfiguration("Release")]
