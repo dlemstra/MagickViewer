@@ -97,7 +97,7 @@ namespace MagickViewer
 			{
 				MagickReadSettings settings = new MagickReadSettings();
 				if (_GhostscriptFormats.Contains(file.Extension.ToUpperInvariant()))
-					settings.Density = new MagickGeometry(300, 300);
+					settings.Density = new PointD(300);
 
 				Images.Read(file, settings);
 				FileName = file.Name;
