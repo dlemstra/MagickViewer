@@ -30,8 +30,8 @@
     <ProductName>MagickViewer</ProductName>
     <PublisherName>Dirk Lemstra</PublisherName>
     <SuiteName>Magick.NET</SuiteName>
-    <MinimumRequiredVersion>7.0.0.9</MinimumRequiredVersion>
-    <ApplicationRevision>10</ApplicationRevision>
+    <MinimumRequiredVersion>7.0.0.12</MinimumRequiredVersion>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>7.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -83,8 +83,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Magick.NET-x64, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Magick.NET-Q16-x64.7.0.0.0009\lib\net40-client\Magick.NET-x64.dll</HintPath>
+      <HintPath>..\packages\Magick.NET-Q16-x64.7.0.0.0012\lib\net40-client\Magick.NET-x64.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Magick.NET.Core, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET-Q16-x64.7.0.0.0012\lib\net40-client\Magick.NET.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Magick.NET.Wrapper-x64, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=AMD64">
+      <HintPath>..\packages\Magick.NET-Q16-x64.7.0.0.0012\lib\net40-client\Magick.NET.Wrapper-x64.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
