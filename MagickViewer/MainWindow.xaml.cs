@@ -52,16 +52,16 @@ namespace MagickViewer
 			_Menu.BeginAnimation(FrameworkElement.VisibilityProperty, null);
 		}
 		//===========================================================================================
-		private void Initialize()
-		{
-			SetTitle();
-		}
-		//===========================================================================================
 		private void InitializeImageManager()
 		{
 			_ImageManager = new ImageManager(Dispatcher.CurrentDispatcher);
 			_ImageManager.Loaded += ImageManager_Loaded;
 			_ImageManager.Loading += ImageManager_Loading;
+		}
+		//===========================================================================================
+		private void InitializeLogo()
+		{
+			_Logo.Click += Logo_Click;
 		}
 		//===========================================================================================
 		private void ImageManager_Loaded(object sender, EventArgs arguments)
@@ -81,6 +81,12 @@ namespace MagickViewer
 		{
 			_Logo.Visibility = Visibility.Collapsed;
 			_ImageViewer.ShowLoadingImage();
+		}
+		//===========================================================================================
+		private void Logo_Click(object sender, RoutedEventArgs e)
+		{
+			HideMenu();
+			_ImageManager.ShowOpenDialog();
 		}
 		//===========================================================================================
 		private void OnCommandClose(object sender, RoutedEventArgs arguments)
@@ -172,7 +178,9 @@ namespace MagickViewer
 		{
 			InitializeComponent();
 			InitializeImageManager();
-			Initialize();
+			InitializeLogo();
+
+			SetTitle();
 		}
 		//===========================================================================================
 	}
