@@ -124,7 +124,10 @@
     </Compile>
     <Compile Include="Controls\Logo.cs" />
     <Compile Include="Controls\ImageViewer.cs" />
+    <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="EventArgs\LoadedEventArgs.cs" />
+    <Compile Include="ImageIterator.cs" />
     <Compile Include="ImageManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

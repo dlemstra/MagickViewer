@@ -10,13 +10,17 @@
 		</ResourceDictionary>
 	</Window.Resources>
 	<Window.CommandBindings>
+		<CommandBinding Command="BrowseBack" Executed="OnCommandBrowseBack" />
+		<CommandBinding Command="BrowseForward" Executed="OnCommandBrowseForward" />
 		<CommandBinding Command="Close" Executed="OnCommandClose" />
 		<CommandBinding Command="Open" Executed="OnCommandOpen" />
 		<CommandBinding Command="Save" Executed="OnCommandSave" />
 		<CommandBinding Command="Stop" Executed="OnCommandStop" />
 	</Window.CommandBindings>
 	<Window.InputBindings>
-		<KeyBinding Key="Escape" Command="ApplicationCommands.Stop" />
+		<KeyBinding Key="Escape" Command="Stop" />
+		<KeyBinding Key="Left" Command="BrowseBack" />
+		<KeyBinding Key="Right" Command="BrowseForward" />
 	</Window.InputBindings>
 	<Grid Style="{DynamicResource Grid}" x:Name="_Grid" DragEnter="OnDragEnter" DragOver="OnDragOver" Drop="OnDrop">
 		<Grid.RowDefinitions>

@@ -137,6 +137,14 @@ namespace MagickViewer.Controls
 			Image.Height = ActualHeight > Image.Source.Height ? Image.Source.Height : ActualHeight;
 		}
 		//===========================================================================================
+		protected override void OnKeyDown(KeyEventArgs arguments)
+		{
+			if (arguments != null && (arguments.Key == Key.Left || arguments.Key == Key.Right))
+				return;
+
+			base.OnKeyDown(arguments);
+		}
+		//===========================================================================================
 		public ImageViewer()
 			: base()
 		{

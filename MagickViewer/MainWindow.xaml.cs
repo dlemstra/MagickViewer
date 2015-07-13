@@ -13,6 +13,7 @@
 //=================================================================================================
 
 using System;
+using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
@@ -32,7 +33,11 @@ namespace MagickViewer
 		private static bool CanDropFile(DragEventArgs arguments)
 		{
 			string[] fileNames = arguments.Data.GetData(DataFormats.FileDrop, true) as string[];
-			return fileNames.Length == 1 && ImageManager.IsSupported(fileNames[0]);
+
+			if (fileNames.Length != 1)
+				return false;
+
+			return ImageManager.IsSupported(fileNames[0]);
 		}
 		//===========================================================================================
 		private bool CheckCanDrop(DragEventArgs arguments)
@@ -64,22 +69,20 @@ namespace MagickViewer
 			_Logo.Click += Logo_Click;
 		}
 		//===========================================================================================
-		private void ImageManager_Loaded(object sender, EventArgs arguments)
+		private void ImageManager_Loaded(object sender, LoadedEventArgs arguments)
 		{
 			_ImageViewer.HideLoadingImage();
 
-			if (_ImageManager.Images.Count == 0)
-				SetTitle(null);
-			else
-			{
+			if (_ImageManager.Images.Count != 0)
 				_ImageViewer.ImageSource = _ImageManager.Images[0].ToBitmapSource();
-				SetTitle(_ImageManager.FileName);
-			}
+			else
+				ShowError(arguments.Exception);
 		}
 		//===========================================================================================
 		private void ImageManager_Loading(object sender, EventArgs arguments)
 		{
 			_Logo.Visibility = Visibility.Collapsed;
+			SetTitle(_ImageManager.FileName);
 			_ImageViewer.ShowLoadingImage();
 		}
 		//===========================================================================================
@@ -87,6 +90,16 @@ namespace MagickViewer
 		{
 			HideMenu();
 			_ImageManager.ShowOpenDialog();
+		}
+		//===========================================================================================
+		private void OnCommandBrowseBack(object sender, RoutedEventArgs arguments)
+		{
+			_ImageManager.Previous();
+		}
+		//===========================================================================================
+		private void OnCommandBrowseForward(object sender, RoutedEventArgs arguments)
+		{
+			_ImageManager.Next();
 		}
 		//===========================================================================================
 		private void OnCommandClose(object sender, RoutedEventArgs arguments)
@@ -147,7 +160,7 @@ namespace MagickViewer
 			_ImageManager.Load(fileNames[0]);
 		}
 		//===========================================================================================
-		private void SetTitle()
+		private void InitializeTitle()
 		{
 			Assembly assembly = typeof(MagickNET).Assembly;
 			AssemblyFileVersionAttribute version = (AssemblyFileVersionAttribute)assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false)[0];
@@ -161,6 +174,11 @@ namespace MagickViewer
 
 			Title = title;
 			_TopBar.Text = title;
+		}
+		//===========================================================================================
+		private void ShowError(MagickErrorException exception)
+		{
+			// TODO: Show the error.
 		}
 		//===========================================================================================
 		private void TopBar_MouseDown(object sender, MouseButtonEventArgs arguments)
@@ -179,8 +197,7 @@ namespace MagickViewer
 			InitializeComponent();
 			InitializeImageManager();
 			InitializeLogo();
-
-			SetTitle();
+			InitializeTitle();
 		}
 		//===========================================================================================
 	}

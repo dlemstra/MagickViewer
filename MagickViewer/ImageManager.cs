@@ -35,6 +35,7 @@ namespace MagickViewer
 		};
 		//===========================================================================================
 		private Dispatcher _Dispatcher;
+		private ImageIterator _ImageIterator;
 		private OpenFileDialog _OpenDialog;
 		private SaveFileDialog _SaveDialog;
 		//===========================================================================================
@@ -64,6 +65,8 @@ namespace MagickViewer
 		//===========================================================================================
 		private void Initialize()
 		{
+			_ImageIterator = new ImageIterator();
+
 			_OpenDialog = new OpenFileDialog();
 			SetOpenFilter();
 
@@ -71,14 +74,26 @@ namespace MagickViewer
 			SetSaveFilter();
 		}
 		//===========================================================================================
-		private void OnLoaded()
+		private void Load(FileInfo file)
+		{
+			Monitor.Enter(_Semaphore);
+
+			_ImageIterator.Current = file;
+
+			OnLoading();
+
+			Thread thread = new Thread(() => ReadImage(file));
+			thread.Start();
+		}
+		//===========================================================================================
+		private void OnLoaded(MagickErrorException exception)
 		{
 			if (Loaded == null)
 				return;
 
 			_Dispatcher.Invoke((Action)delegate()
 			{
-				Loaded(this, EventArgs.Empty);
+				Loaded(this, new LoadedEventArgs(exception));
 				Monitor.Exit(_Semaphore);
 			});
 		}
@@ -93,6 +108,8 @@ namespace MagickViewer
 		{
 			ConstructImages();
 
+			MagickErrorException exception = null;
+
 			try
 			{
 				MagickReadSettings settings = new MagickReadSettings();
@@ -100,14 +117,13 @@ namespace MagickViewer
 					settings.Density = new PointD(300);
 
 				Images.Read(file, settings);
-				FileName = file.Name;
 			}
-			catch (MagickErrorException)
+			catch (MagickErrorException ex)
 			{
-				//TODO: Handle error
+				exception = ex;
 			}
 
-			OnLoaded();
+			OnLoaded(exception);
 		}
 		//===========================================================================================
 		private void Save(string fileName)
@@ -142,12 +158,17 @@ namespace MagickViewer
 		//===========================================================================================
 		public event EventHandler Loading;
 		//===========================================================================================
-		public event EventHandler Loaded;
+		public event EventHandler<LoadedEventArgs> Loaded;
 		//===========================================================================================
 		public string FileName
 		{
-			get;
-			private set;
+			get
+			{
+				if (_ImageIterator.Current == null)
+					return null;
+
+				return _ImageIterator.Current.FullName;
+			}
 		}
 		//===========================================================================================
 		public MagickImageCollection Images
@@ -158,35 +179,12 @@ namespace MagickViewer
 		//===========================================================================================
 		public static bool IsSupported(string fileName)
 		{
-			if (string.IsNullOrEmpty(fileName))
-				return false;
-
-			if (fileName.Length < 2)
-				return false;
-
-			string extension = Path.GetExtension(fileName);
-			if (string.IsNullOrEmpty(extension))
-				return false;
-
-			extension = extension.Substring(1);
-			MagickFormat format;
-			if (!Enum.TryParse<MagickFormat>(extension, true, out format))
-				return false;
-
-			return (from formatInfo in MagickNET.SupportedFormats
-					  where formatInfo.IsReadable && formatInfo.Format == format
-					  select formatInfo).Any();
-
+			return new FileInfo(fileName).IsSupported();
 		}
 		//===========================================================================================
 		public void Load(string fileName)
 		{
-			Monitor.Enter(_Semaphore);
-
-			OnLoading();
-
-			Thread thread = new Thread(() => ReadImage(new FileInfo(fileName)));
-			thread.Start();
+			Load(new FileInfo(fileName));
 		}
 		//===========================================================================================
 		public void ShowOpenDialog()
@@ -203,6 +201,20 @@ namespace MagickViewer
 				return;
 
 			Save(_SaveDialog.FileName);
+		}
+		//===========================================================================================
+		public void Next()
+		{
+			FileInfo file = _ImageIterator.Next();
+			if (file != null)
+				Load(file);
+		}
+		//===========================================================================================
+		public void Previous()
+		{
+			FileInfo file = _ImageIterator.Previous();
+			if (file != null)
+				Load(file);
 		}
 		//===========================================================================================
 	}
