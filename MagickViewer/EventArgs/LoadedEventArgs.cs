@@ -21,6 +21,10 @@ namespace MagickViewer
 	internal sealed class LoadedEventArgs : EventArgs
 	{
 		//===========================================================================================
+		public LoadedEventArgs()
+		{
+		}
+		//===========================================================================================
 		public LoadedEventArgs(MagickErrorException exception)
 		{
 			Exception = exception;

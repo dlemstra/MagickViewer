@@ -25,7 +25,7 @@ using Microsoft.Win32;
 namespace MagickViewer
 {
 	//==============================================================================================
-	internal sealed class ImageManager
+	internal sealed class ImageManager : IDisposable
 	{
 		//===========================================================================================
 		private static readonly object _Semaphore = new object();
@@ -36,15 +36,17 @@ namespace MagickViewer
 		//===========================================================================================
 		private Dispatcher _Dispatcher;
 		private ImageIterator _ImageIterator;
+		private MagickImageCollection _Images;
+		private int _Index;
 		private OpenFileDialog _OpenDialog;
 		private SaveFileDialog _SaveDialog;
 		//===========================================================================================
 		private void ConstructImages()
 		{
-			if (Images != null)
-				Images.Dispose();
+			Dispose();
 
-			Images = new MagickImageCollection();
+			_Images = new MagickImageCollection();
+			_Index = 0;
 		}
 		//===========================================================================================
 		[SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
@@ -86,6 +88,17 @@ namespace MagickViewer
 			thread.Start();
 		}
 		//===========================================================================================
+		private void OnFrameChanged()
+		{
+			if (Loaded == null)
+				return;
+
+			_Dispatcher.Invoke((Action)delegate()
+			{
+				Loaded(this, new LoadedEventArgs());
+			});
+		}
+		//===========================================================================================
 		private void OnLoaded(MagickErrorException exception)
 		{
 			if (Loaded == null)
@@ -116,7 +129,7 @@ namespace MagickViewer
 				if (_GhostscriptFormats.Contains(file.Extension.ToUpperInvariant()))
 					settings.Density = new PointD(300);
 
-				Images.Read(file, settings);
+				_Images.Read(file, settings);
 			}
 			catch (MagickErrorException ex)
 			{
@@ -128,7 +141,7 @@ namespace MagickViewer
 		//===========================================================================================
 		private void Save(string fileName)
 		{
-			Images.Write(fileName);
+			_Images.Write(fileName);
 		}
 		//===========================================================================================
 		private void SetOpenFilter()
@@ -167,14 +180,33 @@ namespace MagickViewer
 				if (_ImageIterator.Current == null)
 					return null;
 
-				return _ImageIterator.Current.FullName;
+				string fileName = _ImageIterator.Current.FullName;
+
+				if (_Images != null && _Images.Count > 1)
+					fileName += " (" + (_Index + 1) + " of " + _Images.Count + ")";
+
+				return fileName;
 			}
 		}
 		//===========================================================================================
-		public MagickImageCollection Images
+		public MagickImage Image
 		{
-			get;
-			private set;
+			get
+			{
+				if (_Images.Count == 0)
+					return null;
+
+				return _Images[_Index];
+			}
+		}
+		//===========================================================================================
+		public void Dispose()
+		{
+			if (_Images == null)
+				return;
+
+			_Images.Dispose();
+			_Images = null;
 		}
 		//===========================================================================================
 		public static bool IsSupported(string fileName)
@@ -210,11 +242,33 @@ namespace MagickViewer
 				Load(file);
 		}
 		//===========================================================================================
+		public void NextFrame()
+		{
+			if (_Images.Count < 2)
+				return;
+
+			if (++_Index == _Images.Count)
+				_Index = 0;
+
+			OnFrameChanged();
+		}
+		//===========================================================================================
 		public void Previous()
 		{
 			FileInfo file = _ImageIterator.Previous();
 			if (file != null)
 				Load(file);
+		}
+		//===========================================================================================
+		public void PreviousFrame()
+		{
+			if (_Images.Count < 2)
+				return;
+
+			if (--_Index == -1)
+				_Index = _Images.Count - 1;
+
+			OnFrameChanged();
 		}
 		//===========================================================================================
 	}

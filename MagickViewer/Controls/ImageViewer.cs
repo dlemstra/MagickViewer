@@ -139,10 +139,7 @@ namespace MagickViewer.Controls
 		//===========================================================================================
 		protected override void OnKeyDown(KeyEventArgs arguments)
 		{
-			if (arguments != null && (arguments.Key == Key.Left || arguments.Key == Key.Right))
-				return;
-
-			base.OnKeyDown(arguments);
+			// Disable KeyDown on the ImageViewer.
 		}
 		//===========================================================================================
 		public ImageViewer()

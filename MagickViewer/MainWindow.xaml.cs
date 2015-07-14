@@ -23,7 +23,7 @@ using ImageMagick;
 namespace MagickViewer
 {
 	///=============================================================================================
-	public partial class MainWindow : Window
+	public sealed partial class MainWindow : Window, IDisposable
 	{
 		//===========================================================================================
 		private bool _CanDrop;
@@ -69,20 +69,29 @@ namespace MagickViewer
 			_Logo.Click += Logo_Click;
 		}
 		//===========================================================================================
+		private static void InitializeMagickNET()
+		{
+			MagickNET.UseOpenCL = false;
+		}
+		//===========================================================================================
 		private void ImageManager_Loaded(object sender, LoadedEventArgs arguments)
 		{
 			_ImageViewer.HideLoadingImage();
 
-			if (_ImageManager.Images.Count != 0)
-				_ImageViewer.ImageSource = _ImageManager.Images[0].ToBitmapSource();
-			else
+			if (_ImageManager.Image == null)
+			{
 				ShowError(arguments.Exception);
+				return;
+			}
+
+			SetTitle();
+			_ImageViewer.ImageSource = _ImageManager.Image.ToBitmapSource();
 		}
 		//===========================================================================================
 		private void ImageManager_Loading(object sender, EventArgs arguments)
 		{
 			_Logo.Visibility = Visibility.Collapsed;
-			SetTitle(_ImageManager.FileName);
+			SetTitle();
 			_ImageViewer.ShowLoadingImage();
 		}
 		//===========================================================================================
@@ -92,19 +101,29 @@ namespace MagickViewer
 			_ImageManager.ShowOpenDialog();
 		}
 		//===========================================================================================
-		private void OnCommandBrowseBack(object sender, RoutedEventArgs arguments)
+		private void OnCommandClose(object sender, RoutedEventArgs arguments)
+		{
+			Close();
+		}
+		//===========================================================================================
+		private void OnCommandMoveDown(object sender, RoutedEventArgs arguments)
+		{
+			_ImageManager.NextFrame();
+		}
+		//===========================================================================================
+		private void OnCommandMoveLeft(object sender, RoutedEventArgs arguments)
 		{
 			_ImageManager.Previous();
 		}
 		//===========================================================================================
-		private void OnCommandBrowseForward(object sender, RoutedEventArgs arguments)
+		private void OnCommandMoveRight(object sender, RoutedEventArgs arguments)
 		{
 			_ImageManager.Next();
 		}
 		//===========================================================================================
-		private void OnCommandClose(object sender, RoutedEventArgs arguments)
+		private void OnCommandMoveUp(object sender, RoutedEventArgs arguments)
 		{
-			Close();
+			_ImageManager.PreviousFrame();
 		}
 		//===========================================================================================
 		private void OnCommandOpen(object sender, RoutedEventArgs arguments)
@@ -165,11 +184,12 @@ namespace MagickViewer
 			Assembly assembly = typeof(MagickNET).Assembly;
 			AssemblyFileVersionAttribute version = (AssemblyFileVersionAttribute)assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false)[0];
 			_Title = "MagickViewer " + version.Version;
-			SetTitle(null);
+			SetTitle();
 		}
 		//===========================================================================================
-		private void SetTitle(string fileName)
+		private void SetTitle()
 		{
+			string fileName = _ImageManager.FileName;
 			string title = !string.IsNullOrEmpty(fileName) ? fileName : _Title;
 
 			Title = title;
@@ -195,9 +215,19 @@ namespace MagickViewer
 		public MainWindow()
 		{
 			InitializeComponent();
+			InitializeMagickNET();
 			InitializeImageManager();
 			InitializeLogo();
 			InitializeTitle();
+		}
+		//===========================================================================================
+		public void Dispose()
+		{
+			if (_ImageManager == null)
+				return;
+
+			_ImageManager.Dispose();
+			_ImageManager = null;
 		}
 		//===========================================================================================
 	}
