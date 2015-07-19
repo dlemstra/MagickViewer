@@ -54,4 +54,9 @@
 		<Setter Property="FontFamily" Value="../../Fonts/#OpenSans-Bold"/>
 		<Setter Property="Padding" Value="24 3 24 0"/>
 	</Style>
+	<Style TargetType="TextBlock" x:Key="Theme.Error">
+		<Setter Property="Foreground" Value="#CC0000"/>
+		<Setter Property="FontSize" Value="16pt"/>
+		<Setter Property="FontFamily" Value="../../Fonts/#OpenSans-Bold"/>
+	</Style>
 </ResourceDictionary>

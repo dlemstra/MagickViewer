@@ -78,6 +78,7 @@ namespace MagickViewer
 		{
 			_ImageViewer.HideLoadingImage();
 
+			ResetError();
 			if (_ImageManager.Image == null)
 			{
 				ShowError(arguments.Exception);
@@ -187,6 +188,11 @@ namespace MagickViewer
 			SetTitle();
 		}
 		//===========================================================================================
+		private void ResetError()
+		{
+			ShowError("");
+		}
+		//===========================================================================================
 		private void SetTitle()
 		{
 			string fileName = _ImageManager.FileName;
@@ -198,7 +204,20 @@ namespace MagickViewer
 		//===========================================================================================
 		private void ShowError(MagickErrorException exception)
 		{
-			// TODO: Show the error.
+			ShowError(exception.Message);
+		}
+		//===========================================================================================
+		private void ShowError(string error)
+		{
+			string errorText = error;
+			if (!string.IsNullOrEmpty(errorText))
+			{
+				int index = error.IndexOf(": ", StringComparison.Ordinal);
+				if (index != -1)
+					errorText = errorText.Substring(index + 2);
+			}
+
+			_Error.Text = errorText;
 		}
 		//===========================================================================================
 		private void TopBar_MouseDown(object sender, MouseButtonEventArgs arguments)
