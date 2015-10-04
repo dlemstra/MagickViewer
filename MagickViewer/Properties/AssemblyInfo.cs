@@ -15,22 +15,19 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Web;
 using System.Resources;
 
-//=================================================================================================
 [assembly: AssemblyTitle("MagickViewer")]
 [assembly: AssemblyProduct("Magick.NET")]
 [assembly: AssemblyDescription("MagickViewer")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyCopyright("Copyright © Dirk Lemstra 2015")]
 [assembly: AssemblyTrademark("")]
-//=================================================================================================
+
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("7.0.0.0")]
 [assembly: AssemblyFileVersion("7.0.0.0")]
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
-[assembly: NeutralResourcesLanguageAttribute("en")]
-//=================================================================================================
+[assembly: NeutralResourcesLanguage("en")]

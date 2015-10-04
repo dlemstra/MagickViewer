@@ -20,52 +20,48 @@ using System.Windows.Input;
 
 namespace MagickViewer.Controls
 {
-	//==============================================================================================
-	internal sealed class Logo : Control
-	{
-		//===========================================================================================
-		public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
-			"Click", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Logo));
-		//===========================================================================================
-		[SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
-		static Logo()
-		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(Logo), new FrameworkPropertyMetadata(typeof(Logo)));
-			EventManager.RegisterClassHandler(typeof(Logo), Mouse.MouseDownEvent, new MouseButtonEventHandler(OnMouseDown));
-		}
-		//===========================================================================================
-		private static void OnMouseDown(object sender, MouseButtonEventArgs arguments)
-		{
-			if (arguments.OriginalSource is Image)
-				RaiseMouseDown(sender as Logo);
-			else
-				OpenWebsite();
-			arguments.Handled = true;
-		}
-		//===========================================================================================
-		private static void OpenWebsite()
-		{
-			Process.Start(new ProcessStartInfo("https://magickviewer.codeplex.com/"));
-		}
-		//===========================================================================================
-		private static void RaiseMouseDown(Logo sender)
-		{
-			RoutedEventArgs eventArgs = new RoutedEventArgs(Logo.ClickEvent);
-			sender.RaiseEvent(eventArgs);
-		}
-		//===========================================================================================
-		public event RoutedEventHandler Click
-		{
-			add
-			{
-				AddHandler(ClickEvent, value);
-			}
-			remove
-			{
-				RemoveHandler(ClickEvent, value);
-			}
-		}
-		//===========================================================================================
-	}
-	//==============================================================================================
+  internal sealed class Logo : Control
+  {
+    public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
+      "Click", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Logo));
+
+    [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
+    static Logo()
+    {
+      DefaultStyleKeyProperty.OverrideMetadata(typeof(Logo), new FrameworkPropertyMetadata(typeof(Logo)));
+      EventManager.RegisterClassHandler(typeof(Logo), Mouse.MouseDownEvent, new MouseButtonEventHandler(OnMouseDown));
+    }
+
+    private static void OnMouseDown(object sender, MouseButtonEventArgs arguments)
+    {
+      if (arguments.OriginalSource is Image)
+        RaiseMouseDown(sender as Logo);
+      else
+        OpenWebsite();
+      arguments.Handled = true;
+    }
+
+    private static void OpenWebsite()
+    {
+      Process.Start(new ProcessStartInfo("https://magickviewer.codeplex.com/"));
+    }
+
+    private static void RaiseMouseDown(Logo sender)
+    {
+      RoutedEventArgs eventArgs = new RoutedEventArgs(Logo.ClickEvent);
+      sender.RaiseEvent(eventArgs);
+    }
+
+    public event RoutedEventHandler Click
+    {
+      add
+      {
+        AddHandler(ClickEvent, value);
+      }
+      remove
+      {
+        RemoveHandler(ClickEvent, value);
+      }
+    }
+  }
 }

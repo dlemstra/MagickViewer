@@ -18,34 +18,31 @@ using System.Windows.Input;
 
 namespace MagickViewer.Controls
 {
-	//==============================================================================================
-	internal sealed class MouseCapture
-	{
-		//===========================================================================================
-		public MouseCapture(ScrollViewer scrollViewer, MouseButtonEventArgs arguments)
-		{
-			VerticalOffset = scrollViewer.VerticalOffset;
-			HorizontalOffset = scrollViewer.HorizontalOffset;
-			Point = arguments.GetPosition(scrollViewer);
-		}
-		//===========================================================================================
-		public double HorizontalOffset
-		{
-			get;
-			private set;
-		}
-		//===========================================================================================
-		public Point Point
-		{
-			get;
-			private set;
-		}
-		//===========================================================================================
-		public double VerticalOffset
-		{
-			get;
-			private set;
-		}
-	}
-	//==============================================================================================
+  internal sealed class MouseCapture
+  {
+    public MouseCapture(ScrollViewer scrollViewer, MouseButtonEventArgs arguments)
+    {
+      VerticalOffset = scrollViewer.VerticalOffset;
+      HorizontalOffset = scrollViewer.HorizontalOffset;
+      Point = arguments.GetPosition(scrollViewer);
+    }
+
+    public double HorizontalOffset
+    {
+      get;
+      private set;
+    }
+
+    public Point Point
+    {
+      get;
+      private set;
+    }
+
+    public double VerticalOffset
+    {
+      get;
+      private set;
+    }
+  }
 }

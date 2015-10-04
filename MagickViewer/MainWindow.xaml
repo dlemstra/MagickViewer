@@ -1,45 +1,46 @@
 ﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-		  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		  xmlns:m="clr-namespace:MagickViewer.Controls"
-		  x:Class="MagickViewer.MainWindow" Style="{DynamicResource Window}" WindowStartupLocation="CenterScreen">
-	<Window.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="Resources/Themes/Merged.xaml" />
-			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
-	</Window.Resources>
-	<Window.CommandBindings>
-		<CommandBinding Command="MoveDown" Executed="OnCommandMoveDown" />
-		<CommandBinding Command="MoveLeft" Executed="OnCommandMoveLeft" />
-		<CommandBinding Command="MoveRight" Executed="OnCommandMoveRight" />
-		<CommandBinding Command="MoveUp" Executed="OnCommandMoveUp" />
-		<CommandBinding Command="Close" Executed="OnCommandClose" />
-		<CommandBinding Command="Open" Executed="OnCommandOpen" />
-		<CommandBinding Command="Save" Executed="OnCommandSave" />
-		<CommandBinding Command="Stop" Executed="OnCommandStop" />
-	</Window.CommandBindings>
-	<Window.InputBindings>
-		<KeyBinding Key="Escape" Command="Stop" />
-		<KeyBinding Key="Down" Command="MoveDown" />
-		<KeyBinding Key="Left" Command="MoveLeft" />
-		<KeyBinding Key="Right" Command="MoveRight" />
-		<KeyBinding Key="Up" Command="MoveUp" />
-	</Window.InputBindings>
-	<Grid Style="{DynamicResource Grid}" x:Name="_Grid" DragEnter="OnDragEnter" DragOver="OnDragOver" Drop="OnDrop">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="20"/>
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-		<TextBlock Style="{DynamicResource TopBar}" x:Name="_TopBar" MouseDown="TopBar_MouseDown"/>
-		<Button Style="{DynamicResource Menu}" Click="OnMenuClick"/>
-		<Button Style="{DynamicResource Close}" Command="Close"/>
-		<StackPanel Style="{DynamicResource MenuBar}" x:Name="_Menu">
-			<Button Style="{DynamicResource Open}" Command="Open"/>
-			<Button Style="{DynamicResource Save}" Command="Save"/>
-		</StackPanel>
-		<m:ImageViewer Style="{DynamicResource ImageViewer}" x:Name="_ImageViewer"/>
-		<m:Logo Style="{DynamicResource Logo}" x:Name="_Logo" Foreground="Black"/>
-		<TextBlock Style="{DynamicResource Error}" x:Name="_Error"/>
-	</Grid>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:m="clr-namespace:MagickViewer.Controls"
+        x:Class="MagickViewer.MainWindow" Style="{DynamicResource Window}"
+        WindowStartupLocation="CenterScreen">
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Resources/Themes/Merged.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Window.Resources>
+  <Window.CommandBindings>
+    <CommandBinding Command="MoveDown" Executed="OnCommandMoveDown" />
+    <CommandBinding Command="MoveLeft" Executed="OnCommandMoveLeft" />
+    <CommandBinding Command="MoveRight" Executed="OnCommandMoveRight" />
+    <CommandBinding Command="MoveUp" Executed="OnCommandMoveUp" />
+    <CommandBinding Command="Close" Executed="OnCommandClose" />
+    <CommandBinding Command="Open" Executed="OnCommandOpen" />
+    <CommandBinding Command="Save" Executed="OnCommandSave" />
+    <CommandBinding Command="Stop" Executed="OnCommandStop" />
+  </Window.CommandBindings>
+  <Window.InputBindings>
+    <KeyBinding Key="Escape" Command="Stop" />
+    <KeyBinding Key="Down" Command="MoveDown" />
+    <KeyBinding Key="Left" Command="MoveLeft" />
+    <KeyBinding Key="Right" Command="MoveRight" />
+    <KeyBinding Key="Up" Command="MoveUp" />
+  </Window.InputBindings>
+  <Grid Style="{DynamicResource Grid}" x:Name="_Grid" DragEnter="OnDragEnter" DragOver="OnDragOver" Drop="OnDrop">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="20"/>
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <TextBlock Style="{DynamicResource TopBar}" x:Name="_TopBar" MouseDown="TopBar_MouseDown"/>
+    <Button Style="{DynamicResource Menu}" Click="OnMenuClick"/>
+    <Button Style="{DynamicResource Close}" Command="Close"/>
+    <StackPanel Style="{DynamicResource MenuBar}" x:Name="_Menu">
+      <Button Style="{DynamicResource Open}" Command="Open"/>
+      <Button Style="{DynamicResource Save}" Command="Save"/>
+    </StackPanel>
+    <m:ImageViewer Style="{DynamicResource ImageViewer}" x:Name="_ImageViewer"/>
+    <m:Logo Style="{DynamicResource Logo}" x:Name="_Logo" Foreground="Black"/>
+    <TextBlock Style="{DynamicResource Error}" x:Name="_Error"/>
+  </Grid>
 </Window>

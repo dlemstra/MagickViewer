@@ -15,9 +15,7 @@ using System.Windows;
 
 namespace MagickViewer
 {
-	//==============================================================================================
-	public partial class App : Application
-	{
-	}
-	//==============================================================================================
+  public partial class App : Application
+  {
+  }
 }

@@ -17,25 +17,21 @@ using ImageMagick;
 
 namespace MagickViewer
 {
-	//==============================================================================================
-	internal sealed class LoadedEventArgs : EventArgs
-	{
-		//===========================================================================================
-		public LoadedEventArgs()
-		{
-		}
-		//===========================================================================================
-		public LoadedEventArgs(MagickErrorException exception)
-		{
-			Exception = exception;
-		}
-		//===========================================================================================
-		public MagickErrorException Exception
-		{
-			get;
-			private set;
-		}
-		//===========================================================================================
-	}
-	//==============================================================================================
+  internal sealed class LoadedEventArgs : EventArgs
+  {
+    public LoadedEventArgs()
+    {
+    }
+
+    public LoadedEventArgs(MagickErrorException exception)
+    {
+      Exception = exception;
+    }
+
+    public MagickErrorException Exception
+    {
+      get;
+      private set;
+    }
+  }
 }

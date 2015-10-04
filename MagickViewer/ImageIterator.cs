@@ -18,74 +18,70 @@ using System.Linq;
 
 namespace MagickViewer
 {
-	//==============================================================================================
-	internal sealed class ImageIterator
-	{
-		//===========================================================================================
-		private FileInfo[] GetSupportedFiles()
-		{
-			return (from file in Current.Directory.GetFiles()
-					  where file.IsSupported()
-					  select file).ToArray();
-		}
-		//===========================================================================================
-		private bool IsCurrent(FileInfo file)
-		{
-			return Current.FullName.Equals(file.FullName, StringComparison.OrdinalIgnoreCase);
-		}
-		//===========================================================================================
-		public FileInfo Current
-		{
-			get;
-			set;
-		}
-		//===========================================================================================
-		internal FileInfo Next()
-		{
-			if (Current == null)
-				return null;
+  internal sealed class ImageIterator
+  {
+    private FileInfo[] GetSupportedFiles()
+    {
+      return (from file in Current.Directory.GetFiles()
+              where file.IsSupported()
+              select file).ToArray();
+    }
 
-			FileInfo[] files = GetSupportedFiles();
-			if (files.Length == 1)
-				return null;
+    private bool IsCurrent(FileInfo file)
+    {
+      return Current.FullName.Equals(file.FullName, StringComparison.OrdinalIgnoreCase);
+    }
 
-			for (int i = 0; i < files.Length; i++)
-			{
-				if (IsCurrent(files[i]))
-				{
-					i++;
-					if (i == files.Length)
-						i = 0;
-					return files[i];
-				}
-			}
+    public FileInfo Current
+    {
+      get;
+      set;
+    }
 
-			return null;
-		}
-		//===========================================================================================
-		internal FileInfo Previous()
-		{
-			if (Current == null)
-				return null;
+    internal FileInfo Next()
+    {
+      if (Current == null)
+        return null;
 
-			FileInfo[] files = GetSupportedFiles();
-			if (files.Length == 1)
-				return null;
+      FileInfo[] files = GetSupportedFiles();
+      if (files.Length == 1)
+        return null;
 
-			for (int i = files.Length - 1; i >= 0; i--)
-			{
-				if (IsCurrent(files[i]))
-				{
-					i--;
-					if (i == -1)
-						i = files.Length - 1;
-					return files[i];
-				}
-			}
+      for (int i = 0; i < files.Length; i++)
+      {
+        if (IsCurrent(files[i]))
+        {
+          i++;
+          if (i == files.Length)
+            i = 0;
+          return files[i];
+        }
+      }
 
-			return null;
-		}
-		//===========================================================================================
-	}
-	//==============================================================================================
+      return null;
+    }
+
+    internal FileInfo Previous()
+    {
+      if (Current == null)
+        return null;
+
+      FileInfo[] files = GetSupportedFiles();
+      if (files.Length == 1)
+        return null;
+
+      for (int i = files.Length - 1; i >= 0; i--)
+      {
+        if (IsCurrent(files[i]))
+        {
+          i--;
+          if (i == -1)
+            i = files.Length - 1;
+          return files[i];
+        }
+      }
+
+      return null;
+    }
+  }
 }

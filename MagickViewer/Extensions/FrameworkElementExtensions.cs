@@ -17,23 +17,19 @@ using System.Windows.Media.Animation;
 
 namespace MagickViewer
 {
-	//==============================================================================================
-	internal static class FrameworkElementExtensions
-	{
-		//===========================================================================================
-		public static void BeginStoryboard(this FrameworkElement self, string resourceKey)
-		{
-			if (self == null)
-				return;
+  internal static class FrameworkElementExtensions
+  {
+    public static void BeginStoryboard(this FrameworkElement self, string resourceKey)
+    {
+      if (self == null)
+        return;
 
-			Storyboard storyboard = self.FindResource(resourceKey) as Storyboard;
-			if (storyboard == null)
-				return;
+      Storyboard storyboard = self.FindResource(resourceKey) as Storyboard;
+      if (storyboard == null)
+        return;
 
-			Storyboard.SetTarget(storyboard, self);
-			storyboard.Begin();
-		}
-		//===========================================================================================
-	}
-	//==============================================================================================
+      Storyboard.SetTarget(storyboard, self);
+      storyboard.Begin();
+    }
+  }
 }

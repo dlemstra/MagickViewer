@@ -19,31 +19,27 @@ using ImageMagick;
 
 namespace MagickViewer
 {
-	//==============================================================================================
-	internal static class FileInfoExtensions
-	{
-		//===========================================================================================
-		public static bool IsSupported(this FileInfo self)
-		{
-			if (self == null || string.IsNullOrEmpty(self.FullName))
-				return false;
+  internal static class FileInfoExtensions
+  {
+    public static bool IsSupported(this FileInfo self)
+    {
+      if (self == null || string.IsNullOrEmpty(self.FullName))
+        return false;
 
-			if (self.Name.Length < 2)
-				return false;
+      if (self.Name.Length < 2)
+        return false;
 
-			if (string.IsNullOrEmpty(self.Extension))
-				return false;
+      if (string.IsNullOrEmpty(self.Extension))
+        return false;
 
-			string extension = self.Extension.Substring(1);
-			MagickFormat format;
-			if (!Enum.TryParse<MagickFormat>(extension, true, out format))
-				return false;
+      string extension = self.Extension.Substring(1);
+      MagickFormat format;
+      if (!Enum.TryParse(extension, true, out format))
+        return false;
 
-			return (from formatInfo in MagickNET.SupportedFormats
-					  where formatInfo.IsReadable && formatInfo.Format == format
-					  select formatInfo).Any();
-		}
-		//===========================================================================================
-	}
-	//==============================================================================================
+      return (from formatInfo in MagickNET.SupportedFormats
+              where formatInfo.IsReadable && formatInfo.Format == format
+              select formatInfo).Any();
+    }
+  }
 }
