@@ -1,5 +1,5 @@
 ﻿//=================================================================================================
-// Copyright 2014-2015 Dirk Lemstra <https://magickviewer.codeplex.com/>
+// Copyright 2014-2016 Dirk Lemstra <https://magickviewer.codeplex.com/>
 //
 // Licensed under the ImageMagick License (the "License"); you may not use this file except in 
 // compliance with the License. You may obtain a copy of the License at
@@ -50,8 +50,8 @@ namespace MagickViewer
 
     private void HideMenu()
     {
-      _Menu.BeginAnimation(FrameworkElement.OpacityProperty, null);
-      _Menu.BeginAnimation(FrameworkElement.VisibilityProperty, null);
+      _Menu.BeginAnimation(OpacityProperty, null);
+      _Menu.BeginAnimation(VisibilityProperty, null);
     }
 
     private void InitializeImageManager()
