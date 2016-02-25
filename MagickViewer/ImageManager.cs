@@ -196,19 +196,25 @@ namespace MagickViewer
 
     public event EventHandler<LoadedEventArgs> Loaded;
 
-    public string FileName
+    public string FileInfo
     {
       get
       {
         if (_ImageIterator.Current == null)
           return null;
 
-        string fileName = _ImageIterator.Current.FullName;
+        string fileInfo = _ImageIterator.Current.FullName;
 
-        if (_Images != null && _Images.Count > 1)
-          fileName += " (" + (_Index + 1) + " of " + _Images.Count + ")";
+        if (_Images != null)
+        {
+          if (_Images.Count > 1)
+            fileInfo += " (" + (_Index + 1) + " of " + _Images.Count + ")";
 
-        return fileName;
+          if (Image != null)
+            fileInfo += " " + Image.Format.ToString().ToUpperInvariant() + " " + Image.Width + "x" + Image.Height;
+        }
+
+        return fileInfo;
       }
     }
 

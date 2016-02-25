@@ -192,8 +192,8 @@ namespace MagickViewer
 
     private void SetTitle()
     {
-      string fileName = _ImageManager.FileName;
-      string title = !string.IsNullOrEmpty(fileName) ? fileName : _Title;
+      string fileInfo = _ImageManager.FileInfo;
+      string title = !string.IsNullOrEmpty(fileInfo) ? fileInfo : _Title;
 
       Title = title;
       _TopBar.Text = title;
