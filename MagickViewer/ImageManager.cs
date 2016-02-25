@@ -33,9 +33,10 @@ namespace MagickViewer
     };
 
     private Dispatcher _Dispatcher;
+    private FileSystemWatcher _Watcher;
     private ImageIterator _ImageIterator;
-    private MagickImageCollection _Images;
     private int _Index;
+    private MagickImageCollection _Images;
     private OpenFileDialog _OpenDialog;
     private SaveFileDialog _SaveDialog;
 
@@ -67,6 +68,9 @@ namespace MagickViewer
     {
       _ImageIterator = new ImageIterator();
 
+      _Watcher = new FileSystemWatcher();
+      _Watcher.Changed += OnFileChanged;
+
       _OpenDialog = new OpenFileDialog();
       SetOpenFilter();
 
@@ -80,10 +84,26 @@ namespace MagickViewer
 
       _ImageIterator.Current = file;
 
+      _Watcher.Path = file.DirectoryName;
+      _Watcher.Filter = file.Name;
+      _Watcher.EnableRaisingEvents = true;
+
       OnLoading();
 
       Thread thread = new Thread(() => ReadImage(file));
       thread.Start();
+    }
+
+    private void OnFileChanged(object sender, FileSystemEventArgs arguments)
+    {
+      _Watcher.EnableRaisingEvents = false;
+
+      _ImageIterator.Current.WaitForAccess();
+
+      _Dispatcher.Invoke((Action)delegate ()
+      {
+        Load(_ImageIterator.Current);
+      });
     }
 
     private void OnFrameChanged()
@@ -111,8 +131,13 @@ namespace MagickViewer
 
     private void OnLoading()
     {
-      if (Loading != null)
+      if (Loading == null)
+        return;
+
+      _Dispatcher.Invoke((Action)delegate ()
+      {
         Loading(this, EventArgs.Empty);
+      });
     }
 
     private void ReadImage(FileInfo file)
