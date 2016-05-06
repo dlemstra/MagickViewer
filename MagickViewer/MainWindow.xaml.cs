@@ -68,7 +68,7 @@ namespace MagickViewer
 
     private static void InitializeMagickNET()
     {
-      MagickNET.UseOpenCL = false;
+      OpenCL.IsEnabled = false;
     }
 
     private void ImageManager_Loaded(object sender, LoadedEventArgs arguments)

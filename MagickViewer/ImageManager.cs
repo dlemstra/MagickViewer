@@ -150,7 +150,7 @@ namespace MagickViewer
       {
         MagickReadSettings settings = new MagickReadSettings();
         if (_GhostscriptFormats.Contains(file.Extension.ToUpperInvariant()))
-          settings.Density = new PointD(300);
+          settings.Density = new Density(300);
 
         _Images.Read(file, settings);
       }
