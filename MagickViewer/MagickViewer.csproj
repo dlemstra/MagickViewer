@@ -32,9 +32,9 @@
     <ProductName>MagickViewer</ProductName>
     <PublisherName>Dirk Lemstra</PublisherName>
     <SuiteName>Magick.NET</SuiteName>
-    <MinimumRequiredVersion>7.0.1.101</MinimumRequiredVersion>
-    <ApplicationRevision>101</ApplicationRevision>
-    <ApplicationVersion>7.0.1.101</ApplicationVersion>
+    <MinimumRequiredVersion>7.0.1.102</MinimumRequiredVersion>
+    <ApplicationRevision>102</ApplicationRevision>
+    <ApplicationVersion>7.0.1.102</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
