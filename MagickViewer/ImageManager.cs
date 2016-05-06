@@ -42,7 +42,7 @@ namespace MagickViewer
 
     private void ConstructImages()
     {
-      Dispose();
+      DisposeImages();
 
       _Images = new MagickImageCollection();
       _Index = 0;
@@ -62,6 +62,24 @@ namespace MagickViewer
                       group formatInfo.Format by formatInfo.Description into g
                       select g.Key + "|*." + string.Join(";*.", g).ToLowerInvariant());
       return filter;
+    }
+
+    private void DisposeImages()
+    {
+      if (_Images == null)
+        return;
+
+      _Images.Dispose();
+      _Images = null;
+    }
+
+    private void DisposeWatcher()
+    {
+      if (_Watcher != null)
+      {
+        _Watcher.Dispose();
+        _Watcher = null;
+      }
     }
 
     private void Initialize()
@@ -231,17 +249,8 @@ namespace MagickViewer
 
     public void Dispose()
     {
-      if (_Images != null)
-      {
-        _Images.Dispose();
-        _Images = null;
-      }
-
-      if (_Watcher != null)
-      {
-        _Watcher.Dispose();
-        _Watcher = null;
-      }
+      DisposeImages();
+      DisposeWatcher();
     }
 
     public static bool IsSupported(string fileName)
