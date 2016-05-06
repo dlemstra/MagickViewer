@@ -231,11 +231,17 @@ namespace MagickViewer
 
     public void Dispose()
     {
-      if (_Images == null)
-        return;
+      if (_Images != null)
+      {
+        _Images.Dispose();
+        _Images = null;
+      }
 
-      _Images.Dispose();
-      _Images = null;
+      if (_Watcher != null)
+      {
+        _Watcher.Dispose();
+        _Watcher = null;
+      }
     }
 
     public static bool IsSupported(string fileName)
