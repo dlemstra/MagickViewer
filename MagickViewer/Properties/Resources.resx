@@ -123,6 +123,9 @@
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
   </data>
+  <data name="Minimize" xml:space="preserve">
+    <value>Minimize</value>
+  </data>
   <data name="Open" xml:space="preserve">
     <value>Open</value>
   </data>

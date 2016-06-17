@@ -150,6 +150,11 @@ namespace MagickViewer
       _Menu.BeginStoryboard(resourceKey);
     }
 
+    private void OnMinimize(object sender, RoutedEventArgs arguments)
+    {
+      WindowState = WindowState.Minimized;
+    }
+
     private void OnDragEnter(object sender, DragEventArgs arguments)
     {
       _CanDrop = false;

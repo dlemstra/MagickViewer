@@ -9,13 +9,16 @@
   <!-- Button -->
   <Style TargetType="Button" x:Key="Close" BasedOn="{StaticResource Theme.Close}">
     <Setter Property="ToolTip" Value="{x:Static p:Resources.Close}"/>
-    <Setter Property="HorizontalAlignment" Value="Right"/>
     <Setter Property="Margin" Value="0 0 4 0"/>
   </Style>
   <Style TargetType="Button" x:Key="Menu" BasedOn="{StaticResource Theme.Menu}">
     <Setter Property="ToolTip" Value="{x:Static p:Resources.Menu}"/>
     <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="Margin" Value="4 0 0 0"/>
+  </Style>
+  <Style TargetType="Button" x:Key="Minimize" BasedOn="{StaticResource Theme.Minimize}">
+    <Setter Property="ToolTip" Value="{x:Static p:Resources.Minimize}"/>
+    <Setter Property="Margin" Value="0 0 4 0"/>
   </Style>
   <Style TargetType="Button" x:Key="Open" BasedOn="{StaticResource Theme.MenuButton}">
     <Setter Property="Content" Value="{x:Static p:Resources.Open}"/>
@@ -58,6 +61,10 @@
     <Setter Property="Orientation" Value="Horizontal"/>
     <Setter Property="Visibility" Value="Hidden"/>
     <Setter Property="VerticalAlignment" Value="Top"/>
+  </Style>
+  <Style TargetType="StackPanel" x:Key="ButtonBar">
+    <Setter Property="Orientation" Value="Horizontal"/>
+    <Setter Property="HorizontalAlignment" Value="Right"/>
   </Style>
   <!-- TextBlock -->
   <Style TargetType="TextBlock" x:Key="TopBar" BasedOn="{StaticResource Theme.TopBar}">

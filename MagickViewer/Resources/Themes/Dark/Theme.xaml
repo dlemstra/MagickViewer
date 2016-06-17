@@ -3,7 +3,7 @@
                     xmlns:m="clr-namespace:MagickViewer.Controls">
   <!-- MergedDictionaries -->
   <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="../Shared.xaml"/>
+    <ResourceDictionary Source="../Shared/Shared.xaml"/>
   </ResourceDictionary.MergedDictionaries>
   <!-- Button -->
   <Style TargetType="Button" x:Key="Theme.MenuButton" BasedOn="{StaticResource Shared.MenuButton}">
@@ -27,6 +27,13 @@
     <Setter Property="Background">
       <Setter.Value>
         <ImageBrush ImageSource="Menu.png"/>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="Button" x:Key="Theme.Minimize" BasedOn="{StaticResource Shared.Icon}">
+    <Setter Property="Background">
+      <Setter.Value>
+        <ImageBrush ImageSource="Minimize.png"/>
       </Setter.Value>
     </Setter>
   </Style>

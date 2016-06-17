@@ -34,7 +34,10 @@
     </Grid.RowDefinitions>
     <TextBlock Style="{DynamicResource TopBar}" x:Name="_TopBar" MouseDown="TopBar_MouseDown"/>
     <Button Style="{DynamicResource Menu}" Click="OnMenuClick"/>
-    <Button Style="{DynamicResource Close}" Command="Close"/>
+    <StackPanel Style="{DynamicResource ButtonBar}">
+      <Button Style="{DynamicResource Minimize}" Click="OnMinimize"/>
+      <Button Style="{DynamicResource Close}" Command="Close"/>
+    </StackPanel>
     <StackPanel Style="{DynamicResource MenuBar}" x:Name="_Menu">
       <Button Style="{DynamicResource Open}" Command="Open"/>
       <Button Style="{DynamicResource Save}" Command="Save"/>
