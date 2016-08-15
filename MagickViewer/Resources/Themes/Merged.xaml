@@ -73,7 +73,7 @@
   </Style>
   <Style TargetType="TextBlock" x:Key="Error" BasedOn="{StaticResource Theme.Error}">
     <Setter Property="Grid.Row" Value="1"/>
-    <Setter Property="Padding" Value="24 0 24 00"/>
+    <Setter Property="Padding" Value="24 0 24 0"/>
     <Setter Property="TextAlignment" Value="Center"/>
     <Setter Property="TextWrapping" Value="Wrap"/>
     <Setter Property="VerticalAlignment" Value="Center"/>
