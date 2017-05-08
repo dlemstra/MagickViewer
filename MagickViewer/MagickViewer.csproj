@@ -27,14 +27,18 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://magickviewer.codeplex.com/releases/clickonce/</InstallUrl>
-    <SupportUrl>https://magickviewer.codeplex.com/</SupportUrl>
+    <InstallUrl>http://magickviewer.azurewebsites.net/</InstallUrl>
+    <UpdateUrl>http://magickviewer.azurewebsites.net/</UpdateUrl>
+    <SupportUrl>https://github.com/dlemstra/MagickViewer</SupportUrl>
     <ProductName>MagickViewer</ProductName>
     <PublisherName>Dirk Lemstra</PublisherName>
     <SuiteName>Magick.NET</SuiteName>
-    <MinimumRequiredVersion>7.0.1.102</MinimumRequiredVersion>
-    <ApplicationRevision>902</ApplicationRevision>
-    <ApplicationVersion>7.0.3.902</ApplicationVersion>
+    <MinimumRequiredVersion>7.0.5.502</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>index.html</WebPage>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>502</ApplicationRevision>
+    <ApplicationVersion>7.0.5.502</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
