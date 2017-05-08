@@ -43,7 +43,7 @@ namespace MagickViewer.Controls
 
     private static void OpenWebsite()
     {
-      Process.Start(new ProcessStartInfo("https://magickviewer.codeplex.com/"));
+      Process.Start(new ProcessStartInfo("https://github.com/dlemstra/MagickViewer"));
     }
 
     private static void RaiseMouseDown(Logo sender)
