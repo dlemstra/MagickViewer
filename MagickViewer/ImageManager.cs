@@ -236,7 +236,7 @@ namespace MagickViewer
       }
     }
 
-    public MagickImage Image
+    public IMagickImage Image
     {
       get
       {
