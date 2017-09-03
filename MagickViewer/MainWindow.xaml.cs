@@ -222,7 +222,7 @@ namespace MagickViewer
 
         private void ShowError(MagickErrorException exception)
         {
-            ShowError(exception.Message);
+            ShowError(exception != null ? exception.Message : "An unknown error occurred.");
         }
 
         private void ShowError(string error)
