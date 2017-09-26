@@ -77,10 +77,11 @@
     <AssemblyOriginatorKeyFile>Magick.NET.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>13B6656B077049BE95E5F780AB3AEB770791C3A0</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>749AA648A392C63844F5DA496A84C9B43BDE20FB</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>MagickViewer.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -171,7 +172,6 @@
     </AdditionalFiles>
     <None Include="app.config" />
     <None Include="Magick.NET.snk" />
-    <None Include="MagickViewer.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
