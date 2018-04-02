@@ -146,6 +146,12 @@ namespace MagickViewer
             _imageManager.ShowOpenDialog();
         }
 
+        private void OnCommandReplace(object sender, RoutedEventArgs arguments)
+        {
+            HideMenu();
+            _imageManager.Optimize();
+        }
+
         private void OnCommandSave(object sender, RoutedEventArgs arguments)
         {
             HideMenu();

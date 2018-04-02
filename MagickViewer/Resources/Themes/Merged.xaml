@@ -26,6 +26,9 @@
   <Style TargetType="Button" x:Key="Save" BasedOn="{StaticResource Theme.MenuButton}">
     <Setter Property="Content" Value="{x:Static p:Resources.Save}"/>
   </Style>
+  <Style TargetType="Button" x:Key="Optimize" BasedOn="{StaticResource Theme.MenuButton}">
+    <Setter Property="Content" Value="{x:Static p:Resources.Optimize}"/>
+  </Style>
   <!-- Grid -->
   <Style TargetType="Grid" x:Key="Grid" BasedOn="{StaticResource Theme.Grid}">
     <Setter Property="AllowDrop" Value="True"/>

@@ -132,6 +132,15 @@ namespace MagickViewer
             OnFrameChanged();
         }
 
+        public void Optimize()
+        {
+            var imageOptimizer = new ImageOptimizer
+            {
+                OptimalCompression = true
+            };
+            imageOptimizer.LosslessCompress(_imageIterator.Current);
+        }
+
         public void Previous()
         {
             FileInfo file = _imageIterator.Previous();
