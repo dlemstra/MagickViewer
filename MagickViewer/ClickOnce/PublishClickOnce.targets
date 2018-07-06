@@ -1,0 +1,47 @@
+<Project>
+  <UsingTask TaskName="GenerateIndexHtml" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <TemplateFilename ParameterType="System.String" Required="true" />
+      <OutputFilename ParameterType="System.String" Required="true" />
+      <ApplicationVersion ParameterType="System.String" Required="true" />
+      <Prerequisites ParameterType="System.String" Required="true" />
+      <ProductName ParameterType="System.String" Required="true" />
+      <PublisherName ParameterType="System.String" Required="true" />
+      <SupportUrl ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+          var template = File.ReadAllText(TemplateFilename);
+          template = template.Replace("[ApplicationVersion]", ApplicationVersion);
+          template = template.Replace("[Prerequisites]", Prerequisites);
+          template = template.Replace("[ProductName]", ProductName);
+          template = template.Replace("[PublisherName]", PublisherName);
+          template = template.Replace("[SupportUrl]", SupportUrl);
+          File.WriteAllText(OutputFilename, template);
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <Target Name="PublishClickOnce" DependsOnTargets="Publish">
+    <ItemGroup>
+      <FilteredBootstrapperPackage Include="@(BootstrapperPackage)" Condition="'%(Install)' == 'true'" />
+    </ItemGroup>
+    <PropertyGroup>
+      <Prerequisites>
+        @(FilteredBootstrapperPackage->'&lt;LI&gt;%(ProductName)&lt;/LI&gt;', '')
+      </Prerequisites>
+    </PropertyGroup>
+    <GenerateIndexHtml
+      TemplateFilename="$(MSBuildThisFileDirectory)Index.html"
+      OutputFilename="$(PublishDir)\Index.html"
+      ApplicationVersion="$(ApplicationVersion)"
+      Prerequisites="$(Prerequisites)"
+      ProductName="$(ProductName)"
+      PublisherName="$(PublisherName)"
+      SupportUrl="$(SupportUrl)" />
+  </Target>
+</Project>

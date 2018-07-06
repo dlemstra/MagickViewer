@@ -171,6 +171,7 @@
       <Link>stylecop.json</Link>
     </AdditionalFiles>
     <None Include="app.config" />
+    <None Include="ClickOnce\PublishClickOnce.targets" />
     <None Include="Magick.NET.snk" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -237,4 +238,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="ClickOnce\PublishClickOnce.targets" Condition="'$(PublishClickOnce)' == 'true'" />
 </Project>
