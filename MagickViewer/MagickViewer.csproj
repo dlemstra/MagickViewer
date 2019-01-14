@@ -33,12 +33,12 @@
     <ProductName>MagickViewer</ProductName>
     <PublisherName>Dirk Lemstra</PublisherName>
     <SuiteName>Magick.NET</SuiteName>
-    <MinimumRequiredVersion>7.9.0.2</MinimumRequiredVersion>
+    <MinimumRequiredVersion>7.10.1.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>7.9.0.2</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>7.10.1.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
