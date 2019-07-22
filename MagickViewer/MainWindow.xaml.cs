@@ -19,6 +19,7 @@ using ImageMagick;
 
 namespace MagickViewer
 {
+    /// <content />
     public sealed partial class MainWindow : Window, IDisposable
     {
         private bool _canDrop;
