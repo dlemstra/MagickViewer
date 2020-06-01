@@ -71,7 +71,7 @@ namespace MagickViewer
             }
         }
 
-        public IMagickImage Image
+        public IMagickImage<ushort> Image
         {
             get
             {
