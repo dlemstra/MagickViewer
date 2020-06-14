@@ -31,8 +31,7 @@ namespace MagickViewer
             if (string.IsNullOrEmpty(self.Extension))
                 return false;
 
-            MagickFormat format;
-            if (!Enum.TryParse(self.Extension.Substring(1), true, out format))
+            if (!Enum.TryParse(self.Extension.Substring(1), true, out MagickFormat format))
                 return false;
 
             return (from formatInfo in MagickNET.SupportedFormats
@@ -42,7 +41,7 @@ namespace MagickViewer
 
         public static bool WaitForAccess(this FileInfo file)
         {
-            bool hasAccess = false;
+            var hasAccess = false;
             while (!hasAccess)
             {
                 try

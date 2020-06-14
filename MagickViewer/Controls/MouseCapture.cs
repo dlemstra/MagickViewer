@@ -25,22 +25,10 @@ namespace MagickViewer.Controls
             Point = arguments.GetPosition(scrollViewer);
         }
 
-        public double HorizontalOffset
-        {
-            get;
-            private set;
-        }
+        public double HorizontalOffset { get; }
 
-        public Point Point
-        {
-            get;
-            private set;
-        }
+        public Point Point { get; }
 
-        public double VerticalOffset
-        {
-            get;
-            private set;
-        }
+        public double VerticalOffset { get; }
     }
 }

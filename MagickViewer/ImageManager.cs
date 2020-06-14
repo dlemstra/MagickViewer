@@ -83,9 +83,7 @@ namespace MagickViewer
         }
 
         public static bool IsSupported(string fileName)
-        {
-            return new FileInfo(fileName).IsSupported();
-        }
+            => new FileInfo(fileName).IsSupported();
 
         public void Dispose()
         {
@@ -94,9 +92,7 @@ namespace MagickViewer
         }
 
         public void Load(string fileName)
-        {
-            Load(new FileInfo(fileName));
-        }
+            => Load(new FileInfo(fileName));
 
         public void ShowOpenDialog()
         {
@@ -116,7 +112,7 @@ namespace MagickViewer
 
         public void Next()
         {
-            FileInfo file = _imageIterator.Next();
+            var file = _imageIterator.Next();
             if (file != null)
                 Load(file);
         }
@@ -138,12 +134,13 @@ namespace MagickViewer
             {
                 OptimalCompression = true
             };
+
             imageOptimizer.LosslessCompress(_imageIterator.Current);
         }
 
         public void Previous()
         {
-            FileInfo file = _imageIterator.Previous();
+            var file = _imageIterator.Previous();
             if (file != null)
                 Load(file);
         }
@@ -171,7 +168,7 @@ namespace MagickViewer
                                      group formatInfo.Format by formatInfo.Description into g
                                      select g.Key + "|*." + string.Join(";*.", g).ToLowerInvariant();
 
-            string filter = "All supported formats (...)|*." + string.Join(";*.", formatNames);
+            var filter = "All supported formats (...)|*." + string.Join(";*.", formatNames);
 
             filter += "|" + string.Join("|", formatDescriptions);
 
@@ -230,7 +227,7 @@ namespace MagickViewer
 
             OnLoading();
 
-            Thread thread = new Thread(() => ReadImage(file));
+            var thread = new Thread(() => ReadImage(file));
             thread.Start();
         }
 
@@ -240,10 +237,7 @@ namespace MagickViewer
 
             _imageIterator.Current.WaitForAccess();
 
-            _dispatcher.Invoke((Action)(() =>
-            {
-                Load(_imageIterator.Current);
-            }));
+            _dispatcher.Invoke((Action)(() => Load(_imageIterator.Current)));
         }
 
         private void OnFrameChanged()
@@ -251,10 +245,7 @@ namespace MagickViewer
             if (Loaded == null)
                 return;
 
-            _dispatcher.Invoke((Action)(() =>
-            {
-                Loaded(this, new LoadedEventArgs());
-            }));
+            _dispatcher.Invoke((Action)(() => Loaded(this, new LoadedEventArgs())));
         }
 
         private void OnLoaded(MagickErrorException exception)
@@ -274,10 +265,7 @@ namespace MagickViewer
             if (Loading == null)
                 return;
 
-            _dispatcher.Invoke((Action)(() =>
-            {
-                Loading(this, EventArgs.Empty);
-            }));
+            _dispatcher.Invoke((Action)(() => Loading(this, EventArgs.Empty)));
         }
 
         private void ReadImage(FileInfo file)
@@ -288,7 +276,7 @@ namespace MagickViewer
 
             try
             {
-                MagickReadSettings settings = new MagickReadSettings();
+                var settings = new MagickReadSettings();
                 if (_GhostscriptFormats.Contains(file.Extension.ToUpperInvariant()))
                     settings.Density = new Density(300);
 
@@ -303,9 +291,7 @@ namespace MagickViewer
         }
 
         private void Save(string fileName)
-        {
-            _images.Write(fileName);
-        }
+            => _images.Write(fileName);
 
         private void SetOpenFilter()
         {

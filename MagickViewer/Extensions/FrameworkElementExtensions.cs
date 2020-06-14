@@ -22,7 +22,7 @@ namespace MagickViewer
             if (self == null)
                 return;
 
-            Storyboard storyboard = self.FindResource(resourceKey) as Storyboard;
+            var storyboard = self.FindResource(resourceKey) as Storyboard;
             if (storyboard == null)
                 return;
 

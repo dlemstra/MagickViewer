@@ -55,9 +55,7 @@ namespace MagickViewer
         }
 
         private static void InitializeMagickNET()
-        {
-            OpenCL.IsEnabled = false;
-        }
+            => OpenCL.IsEnabled = false;
 
         private bool CheckCanDrop(DragEventArgs arguments)
         {
@@ -84,9 +82,7 @@ namespace MagickViewer
         }
 
         private void InitializeLogo()
-        {
-            _Logo.Click += Logo_Click;
-        }
+            => _Logo.Click += Logo_Click;
 
         private void ImageManager_Loaded(object sender, LoadedEventArgs arguments)
         {
@@ -117,29 +113,19 @@ namespace MagickViewer
         }
 
         private void OnCommandClose(object sender, RoutedEventArgs arguments)
-        {
-            Close();
-        }
+            => Close();
 
         private void OnCommandMoveDown(object sender, RoutedEventArgs arguments)
-        {
-            _imageManager.NextFrame();
-        }
+            => _imageManager.NextFrame();
 
         private void OnCommandMoveLeft(object sender, RoutedEventArgs arguments)
-        {
-            _imageManager.Previous();
-        }
+            => _imageManager.Previous();
 
         private void OnCommandMoveRight(object sender, RoutedEventArgs arguments)
-        {
-            _imageManager.Next();
-        }
+            => _imageManager.Next();
 
         private void OnCommandMoveUp(object sender, RoutedEventArgs arguments)
-        {
-            _imageManager.PreviousFrame();
-        }
+            => _imageManager.PreviousFrame();
 
         private void OnCommandOpen(object sender, RoutedEventArgs arguments)
         {
@@ -169,14 +155,12 @@ namespace MagickViewer
 
         private void OnMenuClick(object sender, RoutedEventArgs arguments)
         {
-            string resourceKey = _Menu.Visibility == Visibility.Hidden ? "FadeIn" : "FadeOut";
+            var resourceKey = _Menu.Visibility == Visibility.Hidden ? "FadeIn" : "FadeOut";
             _Menu.BeginStoryboard(resourceKey);
         }
 
         private void OnMinimize(object sender, RoutedEventArgs arguments)
-        {
-            WindowState = WindowState.Minimized;
-        }
+            => WindowState = WindowState.Minimized;
 
         private void OnDragEnter(object sender, DragEventArgs arguments)
         {
@@ -189,9 +173,7 @@ namespace MagickViewer
         }
 
         private void OnDragOver(object sender, DragEventArgs arguments)
-        {
-            CheckCanDrop(arguments);
-        }
+            => CheckCanDrop(arguments);
 
         private void OnDrop(object sender, DragEventArgs arguments)
         {
@@ -201,40 +183,36 @@ namespace MagickViewer
 
         private void OnDropFile(DragEventArgs arguments)
         {
-            string[] fileNames = arguments.Data.GetData(DataFormats.FileDrop, true) as string[];
+            var fileNames = arguments.Data.GetData(DataFormats.FileDrop, true) as string[];
             _imageManager.Load(fileNames[0]);
         }
 
         private void InitializeTitle()
         {
-            Assembly assembly = typeof(MagickNET).Assembly;
-            AssemblyFileVersionAttribute version = (AssemblyFileVersionAttribute)assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false)[0];
+            var assembly = typeof(MagickNET).Assembly;
+            var version = (AssemblyFileVersionAttribute)assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false)[0];
             _title = "MagickViewer " + version.Version;
             SetTitle();
         }
 
         private void ResetError()
-        {
-            ShowError(string.Empty);
-        }
+            => ShowError(string.Empty);
 
         private void SetTitle()
         {
-            string fileInfo = _imageManager.FileInfo;
-            string title = !string.IsNullOrEmpty(fileInfo) ? fileInfo : _title;
+            var fileInfo = _imageManager.FileInfo;
+            var title = !string.IsNullOrEmpty(fileInfo) ? fileInfo : _title;
 
             Title = title;
             _TopBar.Text = title;
         }
 
         private void ShowError(MagickErrorException exception)
-        {
-            ShowError(exception != null ? exception.Message : "An unknown error occurred.");
-        }
+            => ShowError(exception != null ? exception.Message : "An unknown error occurred.");
 
         private void ShowError(string error)
         {
-            string errorText = error;
+            var errorText = error;
             if (!string.IsNullOrEmpty(errorText))
             {
                 int index = error.IndexOf(": ", StringComparison.Ordinal);

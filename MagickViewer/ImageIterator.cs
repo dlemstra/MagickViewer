@@ -18,18 +18,14 @@ namespace MagickViewer
 {
     internal sealed class ImageIterator
     {
-        public FileInfo Current
-        {
-            get;
-            set;
-        }
+        public FileInfo Current { get; set; }
 
         internal FileInfo Next()
         {
             if (Current == null)
                 return null;
 
-            FileInfo[] files = GetSupportedFiles();
+            var files = GetSupportedFiles();
             if (files.Length == 1)
                 return null;
 
@@ -52,7 +48,7 @@ namespace MagickViewer
             if (Current == null)
                 return null;
 
-            FileInfo[] files = GetSupportedFiles();
+            var files = GetSupportedFiles();
             if (files.Length == 1)
                 return null;
 
@@ -78,8 +74,6 @@ namespace MagickViewer
         }
 
         private bool IsCurrent(FileInfo file)
-        {
-            return Current.FullName.Equals(file.FullName, StringComparison.OrdinalIgnoreCase);
-        }
+            => Current.FullName.Equals(file.FullName, StringComparison.OrdinalIgnoreCase);
     }
 }

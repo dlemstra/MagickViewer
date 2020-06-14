@@ -37,37 +37,17 @@ namespace MagickViewer.Controls
 
         public ImageSource ImageSource
         {
-            get
-            {
-                return (ImageSource)GetValue(ImageSourceProperty);
-            }
-
-            set
-            {
-                SetValue(ImageSourceProperty, value);
-            }
+            get => (ImageSource)GetValue(ImageSourceProperty);
+            set => SetValue(ImageSourceProperty, value);
         }
 
         public ImageSource LoadingImageSource
         {
-            get
-            {
-                return (ImageSource)GetValue(LoadingImageSourceProperty);
-            }
-
-            set
-            {
-                SetValue(LoadingImageSourceProperty, value);
-            }
+            get => (ImageSource)GetValue(LoadingImageSourceProperty);
+            set => SetValue(LoadingImageSourceProperty, value);
         }
 
-        private Image Image
-        {
-            get
-            {
-                return (Image)Content;
-            }
-        }
+        private Image Image => (Image)Content;
 
         public void HideLoadingImage()
         {
@@ -97,11 +77,11 @@ namespace MagickViewer.Controls
 
         private static void OnImageSourceChanged(DependencyObject sender, DependencyPropertyChangedEventArgs arguments)
         {
-            ImageViewer target = sender as ImageViewer;
+            var target = sender as ImageViewer;
             if (target == null)
                 return;
 
-            ImageSource source = (ImageSource)arguments.NewValue;
+            var source = (ImageSource)arguments.NewValue;
             if (source == null)
                 return;
 
@@ -111,21 +91,21 @@ namespace MagickViewer.Controls
 
         private void CreateImage()
         {
-            Image image = new Image();
-            image.Style = (Style)FindResource("Image");
+            var image = new Image
+            {
+                Style = (Style)FindResource("Image")
+            };
 
             Content = image;
             UpdateImageSize();
         }
 
         private void OnLayoutUpdated(object sender, EventArgs e)
-        {
-            UpdateImageSize();
-        }
+            => UpdateImageSize();
 
         private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs arguments)
         {
-            ScrollViewer target = sender as ScrollViewer;
+            var target = sender as ScrollViewer;
             if (target == null)
                 return;
 
@@ -137,7 +117,7 @@ namespace MagickViewer.Controls
 
         private void OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs arguments)
         {
-            ScrollViewer target = sender as ScrollViewer;
+            var target = sender as ScrollViewer;
             if (target == null)
                 return;
 
@@ -153,14 +133,14 @@ namespace MagickViewer.Controls
             if (arguments.LeftButton != MouseButtonState.Pressed)
                 return;
 
-            ScrollViewer target = sender as ScrollViewer;
+            var target = sender as ScrollViewer;
             if (target == null)
                 return;
 
-            Point point = arguments.GetPosition(target);
+            var point = arguments.GetPosition(target);
 
-            double dx = point.X - _capture.Point.X;
-            double dy = point.Y - _capture.Point.Y;
+            var dx = point.X - _capture.Point.X;
+            var dy = point.Y - _capture.Point.Y;
             if (Math.Abs(dy) > 5 || Math.Abs(dx) > 5)
                 target.CaptureMouse();
 

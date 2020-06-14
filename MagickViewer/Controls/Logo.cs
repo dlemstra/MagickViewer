@@ -32,15 +32,8 @@ namespace MagickViewer.Controls
 
         public event RoutedEventHandler Click
         {
-            add
-            {
-                AddHandler(ClickEvent, value);
-            }
-
-            remove
-            {
-                RemoveHandler(ClickEvent, value);
-            }
+            add => AddHandler(ClickEvent, value);
+            remove => RemoveHandler(ClickEvent, value);
         }
 
         private static void OnMouseDown(object sender, MouseButtonEventArgs arguments)
@@ -49,13 +42,12 @@ namespace MagickViewer.Controls
                 RaiseMouseDown(sender as Logo);
             else
                 OpenWebsite();
+
             arguments.Handled = true;
         }
 
         private static void OpenWebsite()
-        {
-            Process.Start(new ProcessStartInfo("https://github.com/dlemstra/MagickViewer"));
-        }
+            => Process.Start(new ProcessStartInfo("https://github.com/dlemstra/MagickViewer"));
 
         private static void RaiseMouseDown(Logo sender)
         {

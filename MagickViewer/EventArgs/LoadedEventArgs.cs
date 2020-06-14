@@ -22,14 +22,8 @@ namespace MagickViewer
         }
 
         public LoadedEventArgs(MagickErrorException exception)
-        {
-            Exception = exception;
-        }
+            => Exception = exception;
 
-        public MagickErrorException Exception
-        {
-            get;
-            private set;
-        }
+        public MagickErrorException Exception { get; }
     }
 }
