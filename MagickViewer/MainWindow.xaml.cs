@@ -96,7 +96,9 @@ namespace MagickViewer
             }
 
             SetTitle();
+            _ImageViewer.BeginInit();
             _ImageViewer.ImageSource = _imageManager.Image.ToBitmapSource();
+            _ImageViewer.EndInit();
         }
 
         private void ImageManager_Loading(object sender, EventArgs arguments)
