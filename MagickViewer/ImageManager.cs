@@ -270,6 +270,10 @@ namespace MagickViewer
 
         private void ReadImage(FileInfo file)
         {
+            var previousIndex = int.MaxValue;
+            if (file.FullName == _images?.FirstOrDefault()?.FileName)
+                previousIndex = _index;
+
             ConstructImages();
 
             MagickErrorException exception = null;
@@ -281,6 +285,9 @@ namespace MagickViewer
                     settings.Density = new Density(300);
 
                 _images.Read(file, settings);
+
+                if (previousIndex < _images.Count)
+                    _index = previousIndex;
             }
             catch (MagickErrorException ex)
             {
