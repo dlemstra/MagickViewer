@@ -15,8 +15,8 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("8.3.0")]
-[assembly: AssemblyFileVersion("8.3.0")]
+[assembly: AssemblyVersion("8.3.3")]
+[assembly: AssemblyFileVersion("8.3.3")]
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
 [assembly: NeutralResourcesLanguage("en")]
