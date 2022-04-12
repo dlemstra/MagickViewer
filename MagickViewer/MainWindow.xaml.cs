@@ -73,7 +73,10 @@ namespace MagickViewer
         }
 
         private void InitializeLogo()
-            => _Logo.Click += Logo_Click;
+        {
+            _Logo.Click += Logo_Click;
+            _Logo.Tag = MagickNET.ImageMagickVersion;
+        }
 
         private void ImageManager_Loaded(object sender, LoadedEventArgs arguments)
         {

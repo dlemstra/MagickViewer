@@ -57,6 +57,8 @@
                   <Run FontWeight="ExtraBlack">donation</Run>
                 </TextBlock.Inlines>
               </TextBlock>
+              <TextBlock FontFamily="{TemplateBinding FontFamily}" Foreground="{TemplateBinding Foreground}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" Text="{TemplateBinding Tag}" />
             </StackPanel>
           </Grid>
         </ControlTemplate>
