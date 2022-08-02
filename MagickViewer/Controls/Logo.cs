@@ -42,7 +42,7 @@ namespace MagickViewer.Controls
 
         private static void RaiseMouseDown(Logo sender)
         {
-            RoutedEventArgs eventArgs = new RoutedEventArgs(Logo.ClickEvent);
+            var eventArgs = new RoutedEventArgs(Logo.ClickEvent);
             sender.RaiseEvent(eventArgs);
         }
     }

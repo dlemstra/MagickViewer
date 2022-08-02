@@ -20,7 +20,7 @@ namespace MagickViewer
             if (files.Length == 1)
                 return null;
 
-            for (int i = 0; i < files.Length; i++)
+            for (var i = 0; i < files.Length; i++)
             {
                 if (IsCurrent(files[i]))
                 {
@@ -43,7 +43,7 @@ namespace MagickViewer
             if (files.Length == 1)
                 return null;
 
-            for (int i = files.Length - 1; i >= 0; i--)
+            for (var i = files.Length - 1; i >= 0; i--)
             {
                 if (IsCurrent(files[i]))
                 {

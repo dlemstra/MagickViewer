@@ -37,7 +37,7 @@ namespace MagickViewer
 
         private static bool CanDropFile(DragEventArgs arguments)
         {
-            string[] fileNames = arguments.Data.GetData(DataFormats.FileDrop, true) as string[];
+            var fileNames = arguments.Data.GetData(DataFormats.FileDrop, true) as string[];
 
             if (fileNames.Length != 1)
                 return false;
@@ -211,7 +211,7 @@ namespace MagickViewer
             var errorText = error;
             if (!string.IsNullOrEmpty(errorText))
             {
-                int index = error.IndexOf(": ", StringComparison.Ordinal);
+                var index = error.IndexOf(": ", StringComparison.Ordinal);
                 if (index != -1)
                     errorText = errorText.Substring(index + 2);
             }

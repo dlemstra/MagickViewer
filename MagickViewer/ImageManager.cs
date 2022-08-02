@@ -47,7 +47,7 @@ namespace MagickViewer
                 if (_imageIterator.Current == null)
                     return null;
 
-                string fileInfo = _imageIterator.Current.FullName;
+                var fileInfo = _imageIterator.Current.FullName;
 
                 if (_images != null)
                 {
