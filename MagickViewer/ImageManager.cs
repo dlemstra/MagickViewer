@@ -148,7 +148,7 @@ namespace MagickViewer
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Formats should not be in uppercase.")]
-        private static string CreateFilter(IEnumerable<MagickFormatInfo> formats)
+        private static string CreateFilter(IEnumerable<IMagickFormatInfo> formats)
         {
             var formatNames = from formatInfo in formats
                               orderby formatInfo.Format
