@@ -78,7 +78,7 @@
     <AssemblyOriginatorKeyFile>Magick.NET.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>ACA20CE93E18978CB4DBBFCE1B0ED8573F423B46</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>A444A3261489C9F9D311928643A8EBAEF65B0F6C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
