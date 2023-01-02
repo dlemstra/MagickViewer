@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,7 +13,6 @@ namespace MagickViewer.Controls
         public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
           "Click", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Logo));
 
-        [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "False positive")]
         static Logo()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Logo), new FrameworkPropertyMetadata(typeof(Logo)));

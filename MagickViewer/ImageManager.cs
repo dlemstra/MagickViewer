@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -147,7 +146,6 @@ namespace MagickViewer
             OnFrameChanged();
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Formats should not be in uppercase.")]
         private static string CreateFilter(IEnumerable<IMagickFormatInfo> formats)
         {
             var formatNames = from formatInfo in formats
