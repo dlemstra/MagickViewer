@@ -52,10 +52,10 @@ namespace MagickViewer
                 if (_images != null)
                 {
                     if (_images.Count > 1)
-                        fileInfo += " (" + (_index + 1) + " of " + _images.Count + ")";
+                        fileInfo += $" ({_index + 1} of {_images.Count})";
 
                     if (Image != null)
-                        fileInfo += " " + Image.Format.ToString().ToUpperInvariant() + " " + Image.Width + "x" + Image.Height;
+                        fileInfo += $" {Image.Format.ToString().ToUpperInvariant()} {Image.Width}x{Image.Height}";
                 }
 
                 return fileInfo;
