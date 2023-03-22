@@ -292,7 +292,7 @@ namespace MagickViewer
         private void SetOpenFilter()
         {
             var formats = from formatInfo in MagickNET.SupportedFormats
-                          where formatInfo.IsReadable
+                          where formatInfo.SupportsReading
                           select formatInfo;
 
             _openDialog.Filter = CreateFilter(formats);
@@ -301,7 +301,7 @@ namespace MagickViewer
         private void SetSaveFilter()
         {
             var formats = from formatInfo in MagickNET.SupportedFormats
-                          where formatInfo.IsWritable
+                          where formatInfo.SupportsWriting
                           select formatInfo;
 
             _saveDialog.Filter = CreateFilter(formats);

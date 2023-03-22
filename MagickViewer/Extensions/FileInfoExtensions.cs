@@ -26,7 +26,7 @@ namespace MagickViewer
                 return false;
 
             return (from formatInfo in MagickNET.SupportedFormats
-                    where formatInfo.IsReadable && formatInfo.Format == format
+                    where formatInfo.SupportsReading && formatInfo.Format == format
                     select formatInfo).Any();
         }
 
