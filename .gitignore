@@ -1,8 +1,8 @@
-﻿
-/MagickViewer/bin
-/MagickViewer/obj
-/MagickViewer/*.user
-/*.suo
+﻿bin
+obj
+*.user
+*.suo
+.vs
+
 /packages
 /Publish
-/.vs
