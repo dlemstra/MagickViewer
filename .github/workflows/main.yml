@@ -71,7 +71,7 @@ jobs:
         MagickViewer.application
       working-directory: MagickViewer/bin/Release/app.publish
 
-    - name: Upload ClickOnce artifacts
+    - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: MagickViewer
@@ -83,7 +83,7 @@ jobs:
     needs: build
     if: needs.build.outputs.has-tag == 'true'
     steps:
-    - name: Download ClickOnce artifacts
+    - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
         name: MagickViewer
