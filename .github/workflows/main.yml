@@ -57,3 +57,34 @@ jobs:
       with:
         name: MagickViewer
         path: MagickViewer\bin\Release\app.publish\**
+
+  deploy:
+    name: Deploy MagickViewer
+    runs-on: windows-2022
+    needs: build
+    if: github.event_name != 'pull_request'
+    steps:
+    - name: Download ClickOnce artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: MagickViewer
+
+    - name: Check if commit has tag
+      id: check-tag
+      run: |
+        $tag = git tag --points-at HEAD
+        if ($tag) {
+          echo "has-tag=true" >> $env:GITHUB_OUTPUT
+          echo "tag-name=$tag" >> $env:GITHUB_OUTPUT
+        } else {
+          echo "has-tag=false" >> $env:GITHUB_OUTPUT
+        }
+      shell: powershell
+
+    - name: Deploy to Azure Web App
+      #if: steps.check-tag.outputs.has-tag == 'true'
+      uses: azure/webapps-deploy@v2.2.17
+      with:
+        app-name: magickviewer
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: MagickViewer
