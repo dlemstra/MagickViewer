@@ -17,6 +17,19 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v5
 
+    - name: Check if commit has tag
+      if: github.event_name != 'pull_request'
+      id: check-tag
+      run: |
+        $tag = git tag --points-at HEAD
+        if ($tag) {
+          echo "has-tag=true" >> $env:GITHUB_OUTPUT
+          echo "tag-name=$tag" >> $env:GITHUB_OUTPUT
+        } else {
+          echo "has-tag=false" >> $env:GITHUB_OUTPUT
+        }
+      shell: powershell
+
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
@@ -62,27 +75,14 @@ jobs:
     name: Deploy MagickViewer
     runs-on: windows-2022
     needs: build
-    if: github.event_name != 'pull_request'
+    #if: needs.build.outputs.has-tag == 'true'
     steps:
     - name: Download ClickOnce artifacts
       uses: actions/download-artifact@v4
       with:
         name: MagickViewer
 
-    - name: Check if commit has tag
-      id: check-tag
-      run: |
-        $tag = git tag --points-at HEAD
-        if ($tag) {
-          echo "has-tag=true" >> $env:GITHUB_OUTPUT
-          echo "tag-name=$tag" >> $env:GITHUB_OUTPUT
-        } else {
-          echo "has-tag=false" >> $env:GITHUB_OUTPUT
-        }
-      shell: powershell
-
     - name: Deploy to Azure Web App
-      #if: steps.check-tag.outputs.has-tag == 'true'
       uses: azure/webapps-deploy@v2.2.17
       with:
         app-name: magickviewer
