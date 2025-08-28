@@ -26,7 +26,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://magickviewer.azurewebsites.net/</InstallUrl>
+    <InstallUrl>https://magickviewer.azurewebsites.net/</InstallUrl>
     <UpdateUrl>http://magickviewer.azurewebsites.net/</UpdateUrl>
     <SupportUrl>https://github.com/dlemstra/MagickViewer</SupportUrl>
     <ProductName>MagickViewer</ProductName>
