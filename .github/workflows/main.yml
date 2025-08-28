@@ -12,6 +12,9 @@ jobs:
     permissions:
       id-token: write
 
+    outputs:
+      has-tag: ${{ steps.check-tag.outputs.has-tag }}
+
     steps:
 
     - name: Checkout
@@ -23,8 +26,10 @@ jobs:
       run: |
         $tag = git tag --points-at HEAD
         if ($tag) {
+          echo "Tag found: $tag"
           echo "has-tag=true" >> $env:GITHUB_OUTPUT
         } else {
+          echo "No tag found"
           echo "has-tag=false" >> $env:GITHUB_OUTPUT
         }
       shell: powershell
