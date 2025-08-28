@@ -1,0 +1,33 @@
+on:
+  push:
+    branches:
+    - main
+
+name: main
+jobs:
+  build:
+    name: Build MagickViewer
+    runs-on: windows-2022
+
+    permissions:
+      id-token: write
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v5
+
+    - name: Restore NuGet packages
+      run: nuget restore MagickViewer/packages.config -PackagesDirectory packages
+
+    - name: Build application
+      run: msbuild MagickViewer/MagickViewer.csproj /p:Configuration=Release /p:Platform="Any CPU"
+
+    - name: Publish ClickOnce application
+      run: msbuild MagickViewer/MagickViewer.csproj /p:Configuration=Release /p:Platform="Any CPU" /p:PublishClickOnce=true /t:PublishClickOnce
+
+    - name: Upload ClickOnce artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: MagickViewer
+        path: Publish/
