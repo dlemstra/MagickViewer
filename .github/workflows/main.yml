@@ -29,6 +29,29 @@ jobs:
     - name: Publish
       run: msbuild MagickViewer.sln /p:Configuration=Release /p:Platform="Any CPU" /p:PublishClickOnce=true /t:PublishClickOnce
 
+    - name: Azure CLI login with federated credential
+      if: github.event_name != 'pull_request'
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Install sign cli
+      if: github.event_name != 'pull_request'
+      run: dotnet tool install --global sign --prerelease
+
+    - name: Sign application
+      if: github.event_name != 'pull_request'
+      run: sign code trusted-signing `
+        --trusted-signing-account ImageMagick `
+        --trusted-signing-certificate-profile ImageMagick `
+        --trusted-signing-endpoint https://eus.codesigning.azure.net `
+        --azure-credential-type azure-cli `
+        --verbosity information `
+        MagickViewer.application
+      working-directory: MagickViewer/bin/Release/app.publish
+
     - name: Upload ClickOnce artifacts
       uses: actions/upload-artifact@v4
       with:
