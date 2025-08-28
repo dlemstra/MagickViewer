@@ -74,7 +74,7 @@ jobs:
     name: Deploy MagickViewer
     runs-on: windows-2022
     needs: build
-    #if: needs.build.outputs.has-tag == 'true'
+    if: needs.build.outputs.has-tag == 'true'
     steps:
     - name: Download ClickOnce artifacts
       uses: actions/download-artifact@v4
