@@ -24,7 +24,6 @@ jobs:
         $tag = git tag --points-at HEAD
         if ($tag) {
           echo "has-tag=true" >> $env:GITHUB_OUTPUT
-          echo "tag-name=$tag" >> $env:GITHUB_OUTPUT
         } else {
           echo "has-tag=false" >> $env:GITHUB_OUTPUT
         }
@@ -81,6 +80,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: MagickViewer
+        path: MagickViewer
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2.2.17
