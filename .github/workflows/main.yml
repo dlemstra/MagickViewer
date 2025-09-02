@@ -90,7 +90,7 @@ jobs:
         path: MagickViewer
 
     - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2.2.17
+      uses: azure/webapps-deploy@v3.0.6
       with:
         app-name: magickviewer
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
