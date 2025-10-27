@@ -75,7 +75,7 @@ jobs:
       working-directory: MagickViewer/bin/Release/app.publish
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: MagickViewer
         path: MagickViewer\bin\Release\app.publish\**
