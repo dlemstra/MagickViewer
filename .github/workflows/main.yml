@@ -24,6 +24,7 @@ jobs:
       uses: actions/checkout@v6
       with:
        fetch-tags: true
+       persist-credentials: false
 
     - name: Check if commit has tag
       if: github.event_name != 'pull_request'
