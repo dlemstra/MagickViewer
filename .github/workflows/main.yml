@@ -88,7 +88,7 @@ jobs:
     if: needs.build.outputs.has-tag == 'true'
     steps:
     - name: Download artifacts
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v7
       with:
         name: MagickViewer
         path: MagickViewer
