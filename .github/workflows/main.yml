@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6.0.2
         with:
           fetch-tags: true
           persist-credentials: false
@@ -60,8 +60,7 @@ jobs:
           directory: ${{ github.workspace }}\MagickViewer\bin\Release\app.publish
           files: 'MagickViewer.application'
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #v6.0.0
         with:
           name: MagickViewer
           path: MagickViewer\bin\Release\app.publish\**
@@ -72,14 +71,13 @@ jobs:
     needs: build
     if: needs.build.outputs.has-tag == 'true'
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 #v7.0.0
         with:
           name: MagickViewer
           path: MagickViewer
 
       - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v3.0.6
+        uses: azure/webapps-deploy@657f0700ea5214d56a0400d8ac5e8023c963d25d #3.0.6
         with:
           app-name: magickviewer
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
