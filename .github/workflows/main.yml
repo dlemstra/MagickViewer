@@ -77,7 +77,7 @@ jobs:
           path: MagickViewer
 
       - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@657f0700ea5214d56a0400d8ac5e8023c963d25d #3.0.6
+        uses: azure/webapps-deploy@84a80cfe7e9889f35148ed88c307e6e93bf02578 #3.0.7
         with:
           app-name: magickviewer
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
