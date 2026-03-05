@@ -19,53 +19,52 @@ jobs:
       has-tag: ${{ steps.check-tag.outputs.has-tag }}
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-tags: true
+          persist-credentials: false
 
-    - name: Checkout
-      uses: actions/checkout@v6
-      with:
-       fetch-tags: true
-       persist-credentials: false
+      - name: Check if commit has tag
+        if: github.event_name != 'pull_request'
+        id: check-tag
+        shell: powershell
+        run: |
+          $tag = git tag --points-at HEAD
+          if ($tag) {
+            echo "Tag found: $tag"
+            echo "has-tag=true" >> $env:GITHUB_OUTPUT
+          } else {
+            echo "No tag found"
+            echo "has-tag=false" >> $env:GITHUB_OUTPUT
+          }
 
-    - name: Check if commit has tag
-      if: github.event_name != 'pull_request'
-      id: check-tag
-      run: |
-        $tag = git tag --points-at HEAD
-        if ($tag) {
-          echo "Tag found: $tag"
-          echo "has-tag=true" >> $env:GITHUB_OUTPUT
-        } else {
-          echo "No tag found"
-          echo "has-tag=false" >> $env:GITHUB_OUTPUT
-        }
-      shell: powershell
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
 
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v2
+      - name: Restore NuGet packages
+        run: nuget restore MagickViewer/packages.config -PackagesDirectory packages
 
-    - name: Restore NuGet packages
-      run: nuget restore MagickViewer/packages.config -PackagesDirectory packages
+      - name: Build
+        run: msbuild MagickViewer.sln /p:Configuration=Release /p:Platform="Any CPU"
 
-    - name: Build
-      run: msbuild MagickViewer.sln /p:Configuration=Release /p:Platform="Any CPU"
+      - name: Publish
+        run: msbuild MagickViewer.sln /p:Configuration=Release /p:Platform="Any CPU" /p:PublishClickOnce=true /t:PublishClickOnce
 
-    - name: Publish
-      run: msbuild MagickViewer.sln /p:Configuration=Release /p:Platform="Any CPU" /p:PublishClickOnce=true /t:PublishClickOnce
+      - name: Sign executables and libraries
+        uses: ImageMagick/code-signing-action@4d19869732e1cd97bb823ad21ebffb26ad10836c # v1.0.0
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          directory: ${{ github.workspace }}\MagickViewer\bin\Release\app.publish
+          files: 'MagickViewer.application'
 
-    - name: Sign executables and libraries
-      uses: ImageMagick/code-signing-action@4d19869732e1cd97bb823ad21ebffb26ad10836c # v1.0.0
-      with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        directory: ${{ github.workspace }}\MagickViewer\bin\Release\app.publish
-        files: 'MagickViewer.application'
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v6
-      with:
-        name: MagickViewer
-        path: MagickViewer\bin\Release\app.publish\**
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: MagickViewer
+          path: MagickViewer\bin\Release\app.publish\**
 
   deploy:
     name: Deploy MagickViewer
@@ -73,15 +72,15 @@ jobs:
     needs: build
     if: needs.build.outputs.has-tag == 'true'
     steps:
-    - name: Download artifacts
-      uses: actions/download-artifact@v7
-      with:
-        name: MagickViewer
-        path: MagickViewer
+      - name: Download artifacts
+        uses: actions/download-artifact@v7
+        with:
+          name: MagickViewer
+          path: MagickViewer
 
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v3.0.6
-      with:
-        app-name: magickviewer
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: MagickViewer
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3.0.6
+        with:
+          app-name: magickviewer
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: MagickViewer
