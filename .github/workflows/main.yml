@@ -52,28 +52,14 @@ jobs:
     - name: Publish
       run: msbuild MagickViewer.sln /p:Configuration=Release /p:Platform="Any CPU" /p:PublishClickOnce=true /t:PublishClickOnce
 
-    - name: Azure CLI login with federated credential
-      if: github.event_name != 'pull_request'
-      uses: azure/login@v2
+    - name: Sign executables and libraries
+      uses: ImageMagick/code-signing-action@4d19869732e1cd97bb823ad21ebffb26ad10836c # v1.0.0
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-    - name: Install sign cli
-      if: github.event_name != 'pull_request'
-      run: dotnet tool install --global sign --prerelease
-
-    - name: Sign application
-      if: github.event_name != 'pull_request'
-      run: sign code trusted-signing `
-        --trusted-signing-account ImageMagick `
-        --trusted-signing-certificate-profile ImageMagick `
-        --trusted-signing-endpoint https://eus.codesigning.azure.net `
-        --azure-credential-type azure-cli `
-        --verbosity information `
-        MagickViewer.application
-      working-directory: MagickViewer/bin/Release/app.publish
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          directory: ${{ github.workspace }}\MagickViewer\bin\Release\app.publish
+          files: 'MagickViewer.application'
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v6
