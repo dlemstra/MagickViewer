@@ -4,7 +4,7 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{config,csproj,md,xaml}]
+[*.{config,csproj,md,xaml,yml}]
 
 indent_size = 2
 tab_width = 2
